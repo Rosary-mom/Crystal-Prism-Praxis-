@@ -1,9 +1,31 @@
 <!DOCTYPE html>
+<!-- MANUAL DEPLOY: GitHub Pages → Settings → Pages → branch gh-pages / root -->
+<!-- LIVE: https://rosary-mom.github.io/Crystal-Prism-Praxis-/ -->
+<!-- REPO: https://github.com/Rosary-mom/Crystal-Prism-Praxis- -->
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MARS MISSION 2026 - ROSARY 2026©®™ ff</title>
+    <title>Crystal Prism Praxis — Mars Mission 2026 | ROSARY©®™</title>
+    <meta name="description" content="CRYSTAL PRISM v45 Mars Mission: DWARF Engine, Spacetime Vortex Corridor, Alcubierre Warp Drive.">
+    <link rel="canonical" href="https://rosary-mom.github.io/Crystal-Prism-Praxis-/">
+    <meta property="og:title" content="Crystal Prism Praxis — Mars Mission 2026">
+    <meta property="og:url" content="https://rosary-mom.github.io/Crystal-Prism-Praxis-/">
+    <meta property="og:type" content="website">
+    <script>
+        window.CPP_DEPLOY = {
+            host: 'github-pages',
+            base: (function () {
+                const parts = location.pathname.split('/').filter(Boolean);
+                const i = parts.findIndex(function (p) { return p.toLowerCase() === 'crystal-prism-praxis-'; });
+                return i >= 0 ? '/' + parts.slice(0, i + 1).join('/') + '/' : './';
+            })(),
+            repo: 'https://github.com/Rosary-mom/Crystal-Prism-Praxis-',
+            pages: 'https://rosary-mom.github.io/Crystal-Prism-Praxis-/',
+            validator: 'https://github.com/Rosary-mom/Crystal-Prism-Praxis-/blob/main/crystal_prism_v45.py'
+        };
+        window.cppHref = function (file) { return CPP_DEPLOY.base + String(file).replace(/^\//, ''); };
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -116,12 +138,17 @@
 <body class="p-4 md:p-8">
     <div class="max-w-6xl mx-auto">
         <header class="text-center mb-8 p-4 bg-gray-900/70 rounded-lg border border-cyan-500/50">
+            <div id="gh-pages-banner" class="mb-4 px-4 py-2 text-xs rounded border border-emerald-600/60 bg-emerald-950/40 text-emerald-300">
+                <strong>GitHub Pages</strong> ·
+                <a href="https://rosary-mom.github.io/Crystal-Prism-Praxis-/" class="underline hover:text-white">rosary-mom.github.io/Crystal-Prism-Praxis-/</a> ·
+                Manual deploy: <a href="https://github.com/Rosary-mom/Crystal-Prism-Praxis-/settings/pages" class="underline hover:text-white">Settings → Pages → gh-pages</a>
+            </div>
             <div class="flex flex-wrap justify-center gap-3 mb-4 text-xs">
-                <a href="https://rosary-mom.github.io/Crystal-Prism-Praxis-/" target="_blank" rel="noopener" class="px-3 py-1 border border-violet-500 rounded text-violet-300 hover:bg-violet-900/30">Deploy: GitHub Pages</a>
-                <a href="https://github.com/Rosary-mom/Crystal-Prism-Praxis-" target="_blank" rel="noopener" class="px-3 py-1 border border-cyan-600 rounded hover:bg-cyan-900/40">GitHub Repo</a>
-                <a href="https://blizzwar.vercel.app/" target="_blank" rel="noopener" class="px-3 py-1 border border-cyan-600 rounded hover:bg-cyan-900/40">Legacy: blizzwar</a>
-                <a href="blitzkrieg.html" class="px-3 py-1 border border-amber-500 rounded text-amber-300 hover:bg-amber-900/30">BLITZKRIEG v2.6 Dashboard</a>
-                <a href="crystal_prism_v45.py" class="px-3 py-1 border border-violet-500 rounded text-violet-300 hover:bg-violet-900/30">CRYSTAL PRISM v45 Validator</a>
+                <a href="https://github.com/Rosary-mom/Crystal-Prism-Praxis-" target="_blank" rel="noopener" class="px-3 py-1 border border-cyan-600 rounded hover:bg-cyan-900/40">📦 GitHub Repo</a>
+                <a href="index.html" class="px-3 py-1 border border-violet-500 rounded text-violet-300 hover:bg-violet-900/30">🏠 Home</a>
+                <a href="blitzkrieg.html" class="px-3 py-1 border border-amber-500 rounded text-amber-300 hover:bg-amber-900/30">⚡ BLITZKRIEG v2.6</a>
+                <a href="mars-mission-classic.html" class="px-3 py-1 border border-cyan-600 rounded hover:bg-cyan-900/40">Classic Mirror</a>
+                <a href="https://github.com/Rosary-mom/Crystal-Prism-Praxis-/blob/main/crystal_prism_v45.py" target="_blank" rel="noopener" class="px-3 py-1 border border-violet-500 rounded text-violet-300 hover:bg-violet-900/30">🔮 SPARC Validator (Python)</a>
             </div>
             <h1 class="text-4xl md:text-5xl font-orbitron text-white">PROJEKT CHIMERA: Logbuch der Menschheiten</h1>
             <p class="text-xl mt-2 text-cyan-400">Operation: Das Goldene Zeitalter // RUNDE: <span id="round-counter">1</span></p>
@@ -133,7 +160,7 @@
         </div>
 
         <div class="flex justify-center mb-8 flex-wrap gap-4">
-            <button onclick="window.location.href='blitzkrieg.html'" class="action-button bg-purple-700 hover:bg-purple-500 font-bold border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.5)]">⚡ BLITZKRIEG MODUS</button>
+            <button onclick="window.location.href=cppHref('blitzkrieg.html')" class="action-button bg-purple-700 hover:bg-purple-500 font-bold border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.5)]">⚡ BLITZKRIEG MODUS</button>
             <button id="start-gambit" class="action-button bg-green-700/60">Start Gambit 🎲</button>
             <button id="enter-cockpit" class="action-button">Enter Mars Mission Cockpit 🛰️</button>
             <button id="open-manhunt" class="action-button bg-red-500/60">Start Manhunt 👑</button>
@@ -1057,7 +1084,11 @@
 
         updateResources();
         addLog('Triple-Engine online: DWARF · CRYSTAL PRISM · Alcubierre.');
-        addLog('Live-Mirror: blizzwar.vercel.app ≡ blizzwar-2026.vercel.app');
+        if (location.hostname.includes('github.io')) {
+            addLog('GitHub Pages aktiv: ' + CPP_DEPLOY.pages);
+        } else {
+            addLog('Lokal / Preview — deploy: github.com/Rosary-mom/Crystal-Prism-Praxis-');
+        }
     </script>
 </body>
 </html>
