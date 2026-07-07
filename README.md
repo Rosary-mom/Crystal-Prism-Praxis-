@@ -2,9 +2,9 @@
 
 **CRYSTAL PRISM v45** SPARC validation + **Mars Mission** triple-engine hub.
 
-| Live (after deploy) | Repo |
-|---------------------|------|
-| [crystal-prism-praxis.vercel.app](https://crystal-prism-praxis.vercel.app) | [github.com/Rosary-mom/Crystal-Prism-Praxis-](https://github.com/Rosary-mom/Crystal-Prism-Praxis-) |
+| Live URL (enable Pages once — see below) | Repo |
+|------------------------------------------|------|
+| [rosary-mom.github.io/Crystal-Prism-Praxis-](https://rosary-mom.github.io/Crystal-Prism-Praxis-/) | [github.com/Rosary-mom/Crystal-Prism-Praxis-](https://github.com/Rosary-mom/Crystal-Prism-Praxis-) |
 
 ## Triple-Engine Stack
 
@@ -44,29 +44,22 @@ python crystal_prism_v45.py
 
 Downloads SPARC `Rotmod_LTG.zip` from Zenodo on first run into `sparc_data/`.
 
-## Deploy to Vercel
+## Deploy (one-time setup)
 
-### Option A — GitHub import (recommended)
+### GitHub Pages — **ready** (`gh-pages` branch pushed)
 
-1. Go to [vercel.com/new](https://vercel.com/new)
-2. Import `Rosary-mom/Crystal-Prism-Praxis-`
-3. Framework: **Other** (static)
-4. Root directory: `/` (default)
-5. Deploy — `vercel.json` handles routing
+1. Open [Repo Settings → Pages](https://github.com/Rosary-mom/Crystal-Prism-Praxis-/settings/pages)
+2. **Build and deployment** → Source: **Deploy from a branch**
+3. Branch: **`gh-pages`** / **`/ (root)`** → Save
+4. Live at: **https://rosary-mom.github.io/Crystal-Prism-Praxis-/**
 
-### Option B — CLI
+> If Actions are enabled: `.github/workflows/pages.yml` auto-deploys on every `main` push.
 
-```bash
-npm i -g vercel
-cd Crystal-Prism-Praxis-
-vercel --prod
-```
+### Vercel (optional)
 
-### Option C — GitHub Pages
-
-Settings → Pages → Source: **GitHub Actions** (workflow included) or branch `main` / root.
-
-Site URL: `https://rosary-mom.github.io/Crystal-Prism-Praxis-/`
+1. [vercel.com/new](https://vercel.com/new) → Import `Rosary-mom/Crystal-Prism-Praxis-`
+2. Framework: **Other** · Root: `/`
+3. Or CLI: `vercel login` then `npx vercel --prod`
 
 ## Edit the HTML
 
