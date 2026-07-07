@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARS MISSION 2026 - ROSARY 2026©®™ ff</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Globale Stile und Kontrastverbesserung (unverändert) */
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: #0e0e0e;
+            color: #00FFFF;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/39/Concept_Mars_colony.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        }
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        /* Modulare Kartenstile (unverändert) */
+        .resource-card, .project-card, .log-card, .matrix-card, .cockpit-card, .manhunt-card {
+            background-color: rgba(0, 10, 30, 0.85);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+        }
+        
+        /* Button-Stile (unverändert) */
+        .action-button {
+            background-color: rgba(0, 100, 100, 0.6);
+            border: 1px solid #00FFFF;
+            color: #FFFFFF;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+        
+        /* Progress Bar (unverändert) */
+        .progress-bar {
+            background-color: rgba(255, 255, 255, 0.2);
+            height: 0.75rem;
+            border-radius: 0.25rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background-color: #00FFFF;
+            height: 100%;
+        }
+        
+        /* Gauge / Tacho (unverändert) */
+        .gauge {
+            width: 100px; height: 100px; border-radius: 50%; border: 5px solid #00FFFF;
+            position: relative; margin: 0 auto; overflow: hidden; background: rgba(0, 0, 0, 0.5);
+        }
+        .gauge-fill {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: conic-gradient(#00FFFF 0% var(--fill), rgba(0, 255, 255, 0.2) var(--fill) 100%);
+            border-radius: 50%;
+        }
+        
+        /* Chatbot Overlay */
+        #chatbot-button {
+            position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
+            border-radius: 50%; font-size: 30px; z-index: 1000; background-color: #FF00FF;
+            border: 3px solid #00FFFF; box-shadow: 0 0 15px #FF00FF; cursor: pointer;
+        }
+        #chatbot-window {
+            position: fixed; bottom: 100px; right: 20px; width: 350px; height: 450px;
+            z-index: 999; background: rgba(0, 10, 30, 0.95); border: 3px solid #FF00FF;
+            border-radius: 10px; box-shadow: 0 0 20px #FF00FF; padding: 10px;
+        }
+        
+        /* Formulare und Log (angepasst) */
+        th, td { padding: 8px; border: 1px solid rgba(0, 255, 255, 0.3); text-align: left; color: #00FFFF; }
+        input[type="text"], input[type="number"], select { 
+            padding: 8px; margin: 5px 0; width: 100%; background: rgba(0, 0, 0, 0.4); 
+            color: #00FFFF; border: 1px solid rgba(0, 255, 255, 0.5); border-radius: 4px;
+        }
+        #chat-messages { height: 300px; overflow-y: auto; padding: 5px; border-bottom: 1px solid #FF00FF; }
+        .user-msg { text-align: right; color: #00FFFF; }
+        .bot-msg { text-align: left; color: #FF00FF; }
+
+        /* New Quiz Styles */
+        .quiz-card { background-color: rgba(0, 0, 0, 0.7); border: 1px solid cyan; padding: 1rem; border-radius: 0.5rem; }
+        .option-label { display: flex; align-items: center; gap: 0.5rem; }
+        .option-img { width: 50px; height: 50px; object-fit: cover; border-radius: 0.25rem; }
+
+        /* New Old Earth Schemes Styles */
+        .simulation-card { background-color: rgba(0, 0, 0, 0.7); border: 1px solid cyan; padding: 1rem; border-radius: 0.5rem; }
+
+        /* Warp Drive Styles */
+        .warp-card {
+            background-color: rgba(0, 10, 30, 0.9);
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+        }
+        .warp-slider {
+            accent-color: #00ffff;
+        }
+        .warp-result {
+            font-family: 'Roboto Mono', monospace;
+            background: #001a1a;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #00ffff;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-6xl mx-auto">
+        <header class="text-center mb-8 p-4 bg-gray-900/70 rounded-lg border border-cyan-500/50">
+            <div class="flex flex-wrap justify-center gap-3 mb-4 text-xs">
+                <a href="https://rosary-mom.github.io/Crystal-Prism-Praxis-/" target="_blank" rel="noopener" class="px-3 py-1 border border-violet-500 rounded text-violet-300 hover:bg-violet-900/30">Deploy: GitHub Pages</a>
+                <a href="https://github.com/Rosary-mom/Crystal-Prism-Praxis-" target="_blank" rel="noopener" class="px-3 py-1 border border-cyan-600 rounded hover:bg-cyan-900/40">GitHub Repo</a>
+                <a href="https://blizzwar.vercel.app/" target="_blank" rel="noopener" class="px-3 py-1 border border-cyan-600 rounded hover:bg-cyan-900/40">Legacy: blizzwar</a>
+                <a href="blitzkrieg.html" class="px-3 py-1 border border-amber-500 rounded text-amber-300 hover:bg-amber-900/30">BLITZKRIEG v2.6 Dashboard</a>
+                <a href="crystal_prism_v45.py" class="px-3 py-1 border border-violet-500 rounded text-violet-300 hover:bg-violet-900/30">CRYSTAL PRISM v45 Validator</a>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-orbitron text-white">PROJEKT CHIMERA: Logbuch der Menschheiten</h1>
+            <p class="text-xl mt-2 text-cyan-400">Operation: Das Goldene Zeitalter // RUNDE: <span id="round-counter">1</span></p>
+            <p class="text-sm mt-2 text-gray-400">Triple-Engine Stack: DWARF (Newton) · CRYSTAL PRISM (Vortex) · Alcubierre (Warp)</p>
+        </header>
+
+        <div class="mb-8">
+            <img src="https://media.giphy.com/media/kEESrxmc9pd9Jb064Q/giphy.gif" alt="Climate Crisis GIF" class="w-full rounded-lg shadow-lg mx-auto border border-red-500/50" style="max-width: 600px;">
+        </div>
+
+        <div class="flex justify-center mb-8 flex-wrap gap-4">
+            <button onclick="window.location.href='blitzkrieg.html'" class="action-button bg-purple-700 hover:bg-purple-500 font-bold border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.5)]">⚡ BLITZKRIEG MODUS</button>
+            <button id="start-gambit" class="action-button bg-green-700/60">Start Gambit 🎲</button>
+            <button id="enter-cockpit" class="action-button">Enter Mars Mission Cockpit 🛰️</button>
+            <button id="open-manhunt" class="action-button bg-red-500/60">Start Manhunt 👑</button>
+            <button id="open-avatar-creator" class="action-button bg-yellow-600/60">3D Avatar erstellen 👤</button>
+            <button id="sos-button" class="action-button bg-red-700/60">Send SOS Signal 🆘</button>
+            <button id="reset-button" class="action-button bg-gray-500/60">Spiel zurücksetzen</button>
+            <button id="open-quiz" class="action-button bg-blue-600/60">Quiz starten ❓</button>
+            <button id="open-old-earth" class="action-button bg-indigo-600/60">Old Earth Schemes 🌍</button>
+            <button id="open-prism" class="action-button bg-violet-700/60 font-bold">Crystal Prism Corridor 🔮</button>
+            <button id="open-warp" class="action-button bg-cyan-700/60 font-bold">Warp Drive Simulator 🌀</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="resource-card">
+                <h2 class="text-2xl font-orbitron mb-4 text-cyan-400">Kommando-Ressourcen</h2>
+                <ul class="space-y-2">
+                    <li>Kapital (Mrd.): <span id="capital" class="font-bold text-green-400">18</span> 💰</li>
+                    <li>Datenspeicher (Ziop.): <span id="data" class="font-bold text-yellow-400">5</span> 💾</li>
+                    <li>Legitimität (%): <span id="legitimacy" class="font-bold text-blue-400">75</span> 📜</li>
+                    <li>Personal (Punkte): <span id="personnel" class="font-bold text-purple-400">100</span> 👥</li>
+                </ul>
+            </div>
+
+            <div class="matrix-card">
+                <h2 class="text-2xl font-orbitron mb-4 text-cyan-400">Globale Projekte (Gambit-Matrix)</h2>
+                <ul class="list-disc ml-4 space-y-1 text-sm">
+                    <li>Rosary Think Tank: Das Goldene Zeitalter 🧠</li>
+                    <li>Amazon Legacy Gambit 🌳</li>
+                    <li>Going Clay Gambit (Bodenfruchtbarkeit) 🏺</li>
+                    <li>Debt Crisis Gambit (Levy-Zyklus) 📉</li>
+                    <li>Evident Facts Gambit (Wissenschaft) 🔍</li>
+                </ul>
+            </div>
+
+            <div class="log-card">
+                <h2 class="text-2xl font-orbitron mb-4 text-cyan-400">Operations-Log & Archiv</h2>
+                <ul id="log-list" class="space-y-1 text-sm overflow-y-auto max-h-40">
+                    <li>Runde 1 initialisiert: Mars-Kolonie etabliert. 🚀</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Mars Mission Cockpit (unverändert) -->
+        <div id="cockpit-section" class="cockpit-card mb-8 hidden">
+            <h2 class="text-3xl font-orbitron mb-6 text-center text-red-500">Mars Mission Cockpit: DWARF Engine Kontrollzentrum</h2>
+            <div class="starlink-simulation mb-4 text-center">
+                <h3 class="text-xl font-orbitron text-cyan-400">Starlink SSA Simulation for SOS Signaling 🌟</h3>
+                <blockquote class="twitter-tweet">
+                  <p lang="en" dir="ltr">SpaceX has developed a novel Space Situational Awareness (SSA) system, called Stargaze → <a href="https://starlink.com/updates/stargaze?referral=RC-516239-11127-5&utm_source=twitter&utm_medium=organic&utm_campaign=us_twt_upd_non_vdo_en-us_updates-stargaze">https://starlink.com/updates/stargaze?referral=RC-516239-11127-5&utm_source=twitter&utm_medium=organic&utm_campaign=us_twt_upd_non_vdo_en-us_updates-stargaze</a><br><br>To maximize safety for all satellites in space, <a href="https://twitter.com/SpaceX?ref_src=twsrc%5Etfw">@SpaceX</a> will be making Stargaze conjunction data available to all operators, free of charge. By providing this ephemeris sharing and conjunction screening service free of charge, we hope to motivate operators to take similar steps towards ephemeris sharing and safe flight.</p>
+                  &mdash; Starlink (@Starlink) <a href="https://twitter.com/Starlink/status/2017064797125410863?ref_src=twsrc%5Etfw">January 30, 2026</a>
+                </blockquote>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="h-96 w-full bg-black rounded-lg shadow-xl border border-cyan-500/50 p-2">
+                    <iframe src="https://www.canva.com/design/DAGqacd25Lg/qjKpPfdQ6PNoxrjbV0E7nw/view?embed" title="Solar System Explorer" class="w-full h-full rounded-lg" allowfullscreen></iframe>
+                </div>
+                <div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <h3 class="text-xl font-orbitron text-yellow-400">Legitimität/Energie ⚡</h3>
+                            <div class="gauge"><div class="gauge-fill" id="energy-gauge" style="--fill: 75%;"></div></div>
+                        </div>
+                        <div class="text-center p-4">
+                            <h3 class="text-xl font-orbitron text-green-400">Settlement Progress 🏗️</h3>
+                            <div class="progress-bar mt-2"><div class="progress-fill" id="settlement-progress" style="width: 20%;"></div></div>
+                            <p class="mt-2 text-sm text-gray-400">Fortschritt der Kolonisierung.</p>
+                            <button id="explore-button" class="action-button mt-4 w-full">Explore New Sector 🔭</button>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-xl font-orbitron text-center text-cyan-400">DWARF Engine: Mars Lander Simulation 🚀</h3>
+                        <canvas id="lander-canvas" width="400" height="200" class="mx-auto block mt-2 border-cyan-500"></canvas>
+                        <p class="text-center mt-2 text-sm text-gray-400">Use Arrow-Up (↑) to activate thrust and land safely!</p>
+                        <button id="dwarf-engine" class="action-button w-full mt-4 bg-purple-700/60">Activate DWARF Engine</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WARP DRIVE SECTION (NEU) -->
+        <div id="warp-section" class="warp-card mb-8 hidden">
+            <h2 class="text-3xl font-orbitron mb-4 text-center text-cyan-400">🌀 ALCUBIERRE WARP DRIVE SIMULATOR</h2>
+            <p class="text-center text-sm mb-4">Simuliere den Warp-Bubble mit realer Physik (Alcubierre-Metrik). Erfolgreiche Aktivierung beschleunigt die Mars-Kolonisation dramatisch.</p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Status -->
+                <div>
+                    <h3 class="font-bold mb-2">Aktueller Status</h3>
+                    <div class="warp-result text-sm">
+                        <div>Warp-Level: <span id="warp-level" class="font-bold text-lg">0</span></div>
+                        <div>Reise-Multiplikator: <span id="warp-multiplier" class="font-bold text-lg">1.00</span>x</div>
+                        <div class="mt-2 text-xs">Niedriger Multiplikator = schnellere Mars-Reise</div>
+                    </div>
+                    
+                    <button id="warp-activate-btn" 
+                            class="action-button w-full mt-4 bg-cyan-600 hover:bg-cyan-500">
+                        Warp Simulator öffnen
+                    </button>
+                </div>
+
+                <!-- Quick Info -->
+                <div class="text-sm">
+                    <h3 class="font-bold mb-2">Letzte Warp-Aktion</h3>
+                    <div id="warp-last-action" class="warp-result text-xs min-h-[80px]">
+                        Noch keine Warp-Aktivierung. Starte den Simulator!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CRYSTAL PRISM VORTEX CORRIDOR -->
+        <div id="prism-section" class="warp-card mb-8 hidden" style="border-color:#a855f7; box-shadow:0 0 20px rgba(168,85,247,0.4);">
+            <h2 class="text-3xl font-orbitron mb-4 text-center text-violet-400">🔮 CRYSTAL PRISM v45 — SPACETIME VORTEX CORRIDOR</h2>
+            <p class="text-center text-sm mb-4">SPARC-validierte Vortex-Physik: V<sub>vortex</sub> = α·V<sub>flat</sub>·(1 − e<sup>−r/r<sub>scale</sub></sup>). Mid-tier Transit zwischen DWARF und Alcubierre.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-bold mb-2">Vortex Status</h3>
+                    <div class="warp-result text-sm" style="border-color:#a855f7;">
+                        <div>Prism-Level: <span id="prism-level" class="font-bold text-lg">0</span></div>
+                        <div>Transit-Boost: <span id="prism-boost" class="font-bold text-lg">1.00</span>x</div>
+                        <div class="mt-2 text-xs">α (universal) ≈ 1.0 · r<sub>scale</sub> ≈ r<sub>transition</sub> · 175 SPARC galaxies</div>
+                    </div>
+                    <button id="prism-activate-btn" class="action-button w-full mt-4 bg-violet-600 hover:bg-violet-500">
+                        Vortex Simulator öffnen
+                    </button>
+                </div>
+                <div class="text-sm">
+                    <h3 class="font-bold mb-2">Letzte Prism-Aktion</h3>
+                    <div id="prism-last-action" class="warp-result text-xs min-h-[80px]" style="border-color:#a855f7;">
+                        Noch keine Vortex-Aktivierung. Starte den Simulator!
+                    </div>
+                    <p class="text-xs mt-3 text-gray-400">Quelle: <a href="https://zenodo.org/doi/10.5281/zenodo.21047009" target="_blank" rel="noopener" class="text-violet-300 underline">Spacetime Vortex Solves Dark Matter (Zenodo)</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="avatar-creator-section" class="cockpit-card mb-8 hidden">
+            <!-- Avatar content bleibt unverändert -->
+            <h2 class="text-3xl font-orbitron mb-6 text-center text-yellow-400">Avatar-Konstruktor 👤 (Multiplayer Ready)</h2>
+            <p class="text-center mb-4 text-cyan-400">Erstelle deine personalisierte 3D-Spielfigur (Avatar) mit integriertem QR-Label-Slot (1-10).</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 border border-cyan-500/50 rounded-lg">
+                    <h3 class="text-xl font-orbitron mb-3">Persönliche Parameter</h3>
+                    <input type="text" id="avatar-name" placeholder="Name/Nickname">
+                    <input type="number" id="avatar-height" placeholder="Größe (cm)" min="100" max="250">
+                    <input type="number" id="avatar-weight" placeholder="Gewicht (kg)" min="30" max="200">
+                    <input type="number" id="avatar-age" placeholder="Alter" min="15" max="99">
+                    
+                    <label for="avatar-gender" class="block mt-3 mb-1">Geschlecht / Typus:</label>
+                    <select id="avatar-gender" class="w-full p-2 bg-gray-800 border border-cyan-500/50 rounded-md text-cyan-400">
+                        <option value="none">Wählen...</option>
+                        <option value="m">Männlich (Apostolischer Typus)</option>
+                        <option value="f">Weiblich (Marianischer Typus)</option>
+                        <option value="x">Nicht-Binär (Chimera Typus)</option>
+                    </select>
+                </div>
+
+                <div class="p-4 border border-cyan-500/50 rounded-lg">
+                    <h3 class="text-xl font-orbitron mb-3">Foto & QR-Label</h3>
+                    <p class="mb-2 text-sm text-red-400">Kamera-Foto-Upload (Simuliert):</p>
+                    <input type="file" id="avatar-photo" accept="image/*" class="w-full text-sm text-cyan-400/80 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-cyan-500/20 file:text-cyan-400 hover:file:bg-cyan-500/40">
+                    <label for="qr-code-id" class="block mt-4 mb-1">Zugewiesene QR-Reg.com ID (1-10):</label>
+                    <input type="number" id="qr-code-id" placeholder="QR-Label ID" min="1" max="10">
+                    <div id="avatar-preview" class="mt-4 h-24 bg-gray-700/50 flex items-center justify-center rounded-md text-sm text-gray-400">
+                        Avatar-Preview (Foto-Upload simuliert)
+                    </div>
+                </div>
+            </div>
+            
+            <button id="generate-3d-file" class="action-button w-full mt-6 bg-purple-600/70">3D-Druckdatei generieren & QR-Label verknüpfen</button>
+            
+            <div id="download-link-container" class="mt-4 text-center hidden">
+                <p class="text-green-400 text-lg">Generierung erfolgreich! Lade deine Datei herunter:</p>
+                <a id="download-link" href="#" download="chimera_avatar.stl" class="action-button bg-green-700/60 mt-2 inline-block">Download 3D-Druckdatei (STL)</a>
+            </div>
+        </div>
+
+        <div id="manhunt-section" class="manhunt-card mb-8 hidden">
+            <!-- Manhunt content bleibt unverändert -->
+            <h2 class="text-3xl font-orbitron mb-6 text-center text-red-500">Operation: KRONJUWELEN-MANHUNT 👑</h2>
+            <p class="text-center mb-4 text-cyan-400">Verwende HUMINT und Geo-Daten, um die Räuber des Louvre zu stellen. Fortschritt: <span id="manhunt-percent">0</span>%</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-4 border border-red-500/50 rounded-lg">
+                    <h3 class="text-xl font-orbitron mb-3 text-red-400">FAHNDUNGS-MATRIX (Logik-Prüfung)</h3>
+                    <p class="text-sm text-gray-400 mb-4">Beantworte W-Fragen. Kosten: Daten -5.</p>
+                    
+                    <label for="w-question" class="block mt-3 mb-1">Welches ist das wahrscheinlichste Motiv (Wieso)?</label>
+                    <select id="w-question" class="w-full p-2 bg-gray-800 border-red-500/50 text-cyan-400">
+                        <option value="none">Wählen...</option>
+                        <option value="politic">Politische Korrektur / Monarchistische Restauration</option>
+                        <option value="finance">Finanzielle Bereicherung / Schwarzmarkt</option>
+                        <option value="dynasty">Dynastische Allianz / Erbansprüche (Mecklenburg-Orléans)</option>
+                    </select>
+                    
+                    <label for="w-wer" class="block mt-3 mb-1">Wer hat den Raub initiiert (Wer)?</label>
+                    <input type="text" id="w-wer" placeholder="Organisation/Person (z.B. RN/Le Pen, UN-Agenten)">
+                    
+                    <button id="submit-w-questions" class="action-button bg-red-700/60 mt-4 w-full">Analyse starten</button>
+                </div>
+
+                <div class="p-4 border border-red-500/50 rounded-lg">
+                    <h3 class="text-xl font-orbitron mb-3 text-red-400">HUMINT & GEOTAGGING (Live-Daten)</h3>
+                    
+                    <p class="text-sm text-gray-400">Scanne einen der 10 QR-Labels für eine Geo-Spur. Kosten: Kapital -3.</p>
+                    <button id="scan-qr-tag" class="action-button bg-cyan-700/60 w-full mt-2">QR-Tag scannen / Position abrufen 📱</button>
+                    
+                    <label for="social-media-input" class="block mt-4 mb-1">Real Crime Blog Eintrag finden (Wann/Wo):</label>
+                    <input type="text" id="social-media-input" placeholder="Ort/Datum eingeben (z.B. Fontainebleau, Antwerpen)">
+                    
+                    <button id="submit-humint" class="action-button bg-cyan-700/60 mt-4 w-full">HUMINT abfragen</button>
+                </div>
+            </div>
+            
+            <div class="progress-bar mt-6"><div class="progress-fill" id="manhunt-progress" style="width: 0%;"></div></div>
+        </div>
+
+        <div id="ranking" class="cockpit-card mb-8">
+            <h2 class="text-3xl font-orbitron mb-4 text-center text-yellow-400">Spieler-Ranking 🏆 (Effizienz-Score)</h2>
+            <div class="flex flex-col md:flex-row gap-4 mb-4">
+                <input type="text" id="player-name" placeholder="Dein Name für Ranking" class="flex-grow">
+                <button id="save-score" class="action-button flex-shrink-0 bg-yellow-700/60">Score speichern</button>
+            </div>
+            <table id="ranking-table">
+                <thead><tr><th>Name</th><th>Score (Effizienz)</th><th>Datum</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div id="quiz-section" class="quiz-card mb-8 hidden">
+            <h2 class="text-3xl font-orbitron mb-6 text-center text-yellow-400">Mars-Kolonie Quiz (mit Bildern)</h2>
+            <p class="text-center mb-4 text-cyan-400">Beantworte Fragen zur Migration und Demografie. Bilder inspirieren die Optionen wie in X-Umfragen.</p>
+            <div id="quiz-container"></div>
+            <button id="submit-quiz" class="action-button mt-4">Antwort überprüfen</button>
+            <div id="quiz-feedback" class="mt-4 text-cyan-400"></div>
+        </div>
+
+        <div id="old-earth-section" class="simulation-card mb-8 hidden">
+            <h2 class="text-3xl font-orbitron mb-6 text-center text-indigo-400">Old Earth Schemes 🌍</h2>
+            <p class="text-center mb-4 text-cyan-400">Simuliere Szenarien der Alten Erde, um Lektionen für die Mars-Kolonie zu lernen.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Simulation 1: USP</h3>
+                        <p class="text-gray-600 mb-4 text-sm">This is the first embedded simulation from the 'USP' repository.</p>
+                    </div>
+                    <div class="w-full bg-gray-200">
+                        <iframe 
+                            src="https://rosary-mom.github.io/USP/simulations/super-simulation.html" 
+                            title="USP Simulation" 
+                            frameborder="0" 
+                            class="w-full h-[600px]"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Simulation 2: Codespaces-Jupyter</h3>
+                         <p class="text-gray-600 mb-4 text-sm">This is the second embedded simulation from the 'codespaces-jupyter' repository.</p>
+                    </div>
+                    <div class="w-full bg-gray-200">
+                        <iframe 
+                            src="https://rosary-mom.github.io/codespaces-jupyter/simulations/super-simulation.html" 
+                            title="Codespaces-Jupyter Simulation" 
+                            frameborder="0" 
+                            class="w-full h-[600px]"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="mt-8 text-sm text-center text-gray-500">©®™ ROSARY 2025 ff | Be a SuperHero! -"CHIMMY" 🦸‍♂️</p>
+    </div>
+    
+    <button id="chatbot-button" class="flex items-center justify-center text-white font-bold">🧠</button>
+    
+    <div id="chatbot-window" class="hidden p-3">
+        <h3 class="text-lg font-orbitron text-center mb-2 text-pink-400">XAI Chatbot Log</h3>
+        <div id="chat-messages" class="mb-2">
+             <p class="bot-msg">Willkommen, Kommandant. Ich bin der XAI Chatbot, bereit für Anfragen. Wie kann ich die Ermittlung unterstützen?</p>
+             <p class="bot-msg">Lol, wusstest du, dass Portugal als EU-Land den ARTEMIS-Vertrag unterzeichnet hat, um Frieden auf dem Mond, dem Mars und im weiteren Universum zu sichern? 🚀🇵🇹</p>
+        </div>
+        <input type="text" id="chat-input" placeholder="Ihre Frage/Anregung..." class="w-full">
+        <button id="send-chat" class="action-button w-full mt-2 bg-pink-700/60">Senden</button>
+    </div>
+
+    <script>
+        // --- Zentrales Spielzustands-Objekt ---
+        const initialState = {
+            round: 1, capital: 18, data: 5, legitimacy: 75, personnel: 100, 
+            settlementProgress: 20, manhuntProgress: 0,
+            warpLevel: 0,
+            warpTravelMultiplier: 1.0,
+            prismLevel: 0,
+            prismBoost: 1.0,
+            prismAlpha: 1.0,
+            prismRscale: 5.0
+        };
+        let gameState = {...initialState}; 
+
+        const rankingBody = document.getElementById('ranking-table').querySelector('tbody');
+
+        function loadRanking() {
+            const rankings = JSON.parse(localStorage.getItem('chimeraRankings')) || [];
+            rankings.sort((a, b) => b.score - a.score); 
+            rankingBody.innerHTML = '';
+            rankings.forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${entry.name}</td><td>${entry.score}</td><td>${entry.date}</td>`;
+                rankingBody.appendChild(row);
+            });
+        }
+        
+        loadRanking(); 
+
+        function updateResources() {
+            document.getElementById('round-counter').textContent = gameState.round;
+            document.getElementById('capital').textContent = gameState.capital;
+            document.getElementById('data').textContent = gameState.data;
+            document.getElementById('legitimacy').textContent = gameState.legitimacy;
+            document.getElementById('personnel').textContent = gameState.personnel;
+            
+            const legFill = Math.min(100, gameState.legitimacy);
+            if (document.getElementById('energy-gauge')) {
+                document.getElementById('energy-gauge').style.setProperty('--fill', `${legFill}%`);
+            }
+            if (document.querySelector('#settlement-progress')) {
+                document.querySelector('#settlement-progress').style.width = `${Math.min(100, gameState.settlementProgress)}%`;
+            }
+            if (document.querySelector('#manhunt-progress')) {
+                document.querySelector('#manhunt-progress').style.width = `${Math.min(100, gameState.manhuntProgress)}%`;
+            }
+            if (document.getElementById('manhunt-percent')) {
+                document.getElementById('manhunt-percent').textContent = `${Math.min(100, gameState.manhuntProgress)}`;
+            }
+
+            // Warp Status Update
+            const warpLevelEl = document.getElementById('warp-level');
+            const warpMultiEl = document.getElementById('warp-multiplier');
+            if (warpLevelEl) warpLevelEl.textContent = gameState.warpLevel;
+            if (warpMultiEl) warpMultiEl.textContent = gameState.warpTravelMultiplier.toFixed(2);
+
+            const prismLevelEl = document.getElementById('prism-level');
+            const prismBoostEl = document.getElementById('prism-boost');
+            if (prismLevelEl) prismLevelEl.textContent = gameState.prismLevel;
+            if (prismBoostEl) prismBoostEl.textContent = gameState.prismBoost.toFixed(2);
+        }
+
+        const addLog = (message) => {
+            const li = document.createElement('li');
+            li.textContent = message;
+            const logList = document.getElementById('log-list');
+            logList.prepend(li);
+            if (logList.children.length > 10) logList.removeChild(logList.lastChild);
+        };
+
+        // ==================== WARP DRIVE INTEGRATION ====================
+
+        // Alcubierre Formeln
+        function shapingFunction(r_s, sigma, R) {
+            return (Math.tanh(sigma * (r_s + R)) - Math.tanh(sigma * (r_s - R))) / (2 * Math.tanh(sigma * R));
+        }
+
+        function computeYorkTime(v_s, sigma, R) {
+            const dr = 0.1;
+            const df = (shapingFunction(dr, sigma, R) - shapingFunction(-dr, sigma, R)) / (2 * dr);
+            return v_s * df;
+        }
+
+        function computeEnergyDensity(v_s, sigma, R) {
+            const dr = 0.1;
+            const df = (shapingFunction(dr, sigma, R) - shapingFunction(-dr, sigma, R)) / (2 * dr);
+            const d2f = (shapingFunction(2*dr, sigma, R) - 2*shapingFunction(0, sigma, R) + 
+                        shapingFunction(-2*dr, sigma, R)) / (4 * dr * dr);
+            const rho = - (v_s * v_s * df * df * d2f * d2f) / (32 * Math.PI * 100);
+            return rho;
+        }
+
+        function openWarpSimulator() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[9999]';
+            
+            modal.innerHTML = `
+                <div class="warp-card p-6 rounded-xl max-w-[920px] w-[95%] max-h-[92vh] overflow-auto text-cyan-400">
+                    <h2 class="text-3xl font-orbitron text-center mb-1">🌀 ALCUBIERRE WARP DRIVE</h2>
+                    <p class="text-center text-sm mb-4">Echtzeit-Simulation der Alcubierre-Metrik</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Controls -->
+                        <div>
+                            <h4 class="font-bold mb-3">Parameter einstellen</h4>
+                            
+                            <div class="mb-4">
+                                <label class="block text-xs">Bubble Radius R (km): <span id="R-val">120</span></label>
+                                <input type="range" id="R" min="50" max="400" value="120" class="warp-slider w-full">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="block text-xs">Schalendicke σ: <span id="sigma-val">12</span></label>
+                                <input type="range" id="sigma" min="3" max="35" value="12" class="warp-slider w-full">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="block text-xs">Warp-Geschwindigkeit v_s (c): <span id="vs-val">2.8</span></label>
+                                <input type="range" id="vs" min="0.8" max="9" step="0.1" value="2.8" class="warp-slider w-full">
+                            </div>
+
+                            <div class="mt-6">
+                                <button id="activate-warp-btn"
+                                        class="action-button w-full bg-cyan-600 hover:bg-cyan-500 text-lg py-3">
+                                    WARP AKTIVIEREN<br>
+                                    <span class="text-xs">(Kosten: 6 Kapital + 12 Personal)</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Live Results -->
+                        <div>
+                            <h4 class="font-bold mb-3">Echtzeit-Ergebnisse</h4>
+                            <div id="warp-live-results" class="warp-result text-sm leading-relaxed mb-4">
+                                <!-- wird per JS befüllt -->
+                            </div>
+
+                            <div class="text-xs bg-[#001a1a] p-3 rounded border border-cyan-800">
+                                <strong>Physik:</strong><br>
+                                • f(r) = Shaping Function<br>
+                                • θ = York Time (Raumverzerrung)<br>
+                                • ρ = Negative Energie-Dichte
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-6">
+                        <button onclick="this.closest('.fixed').remove()" 
+                                class="text-sm px-6 py-2 border border-cyan-700 rounded hover:bg-cyan-900">
+                            Schließen
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            // Slider Logic
+            const R = modal.querySelector('#R');
+            const sigma = modal.querySelector('#sigma');
+            const vs = modal.querySelector('#vs');
+            const resultsDiv = modal.querySelector('#warp-live-results');
+
+            function updateLiveResults() {
+                const Rv = parseFloat(R.value);
+                const sigmav = parseFloat(sigma.value);
+                const vsv = parseFloat(vs.value);
+
+                modal.querySelector('#R-val').textContent = Rv;
+                modal.querySelector('#sigma-val').textContent = sigmav;
+                modal.querySelector('#vs-val').textContent = vsv;
+
+                const f = shapingFunction(0, sigmav, Rv);
+                const york = computeYorkTime(vsv, sigmav, Rv);
+                const energy = computeEnergyDensity(vsv, sigmav, Rv);
+                const success = Math.min(94, Math.floor(58 + sigmav * 1.1));
+
+                resultsDiv.innerHTML = `
+                    f(0) = ${f.toFixed(4)} &nbsp;&nbsp; | &nbsp;&nbsp; 
+                    York Time θ ≈ ${york.toFixed(3)}<br>
+                    Energie-Dichte ρ ≈ ${energy.toFixed(3)} <span class="text-red-400">(negativ)</span><br>
+                    Geschätzte Reisezeit-Reduktion: ${(vsv * 0.22).toFixed(2)}x<br>
+                    Erfolgswahrscheinlichkeit: ${success}%
+                `;
+            }
+
+            R.oninput = updateLiveResults;
+            sigma.oninput = updateLiveResults;
+            vs.oninput = updateLiveResults;
+            updateLiveResults();
+
+            // Activate Warp Button
+            modal.querySelector('#activate-warp-btn').onclick = () => {
+                activateWarpFromModal(modal, parseFloat(R.value), parseFloat(sigma.value), parseFloat(vs.value));
+            };
+        }
+
+        function activateWarpFromModal(modal, R, sigma, vs) {
+            const costCapital = 6;
+            const costPersonnel = 12;
+
+            if (gameState.capital < costCapital || gameState.personnel < costPersonnel) {
+                alert("Nicht genug Ressourcen! Benötigt: 6 Kapital + 12 Personal");
+                return;
+            }
+
+            gameState.capital -= costCapital;
+            gameState.personnel -= costPersonnel;
+
+            const energy = computeEnergyDensity(vs, sigma, R);
+            const successRate = Math.min(94, Math.floor(58 + sigma * 1.1));
+            const success = Math.random() * 100 < successRate;
+
+            let logMsg = "";
+
+            if (success) {
+                const reduction = Math.min(0.65, vs * 0.18);
+                gameState.warpTravelMultiplier = Math.max(0.25, gameState.warpTravelMultiplier - reduction);
+                gameState.warpLevel = Math.min(5, gameState.warpLevel + 1);
+                gameState.settlementProgress = Math.min(100, gameState.settlementProgress + 12);
+                gameState.legitimacy = Math.min(100, gameState.legitimacy + 7);
+
+                logMsg = `✅ WARP ERFOLGREICH! v=${vs}c | Multiplikator jetzt ${gameState.warpTravelMultiplier.toFixed(2)}x | Level ${gameState.warpLevel}`;
+                document.getElementById('warp-last-action').innerHTML = `Erfolg! Reisezeit stark reduziert.<br>Multiplikator: ${gameState.warpTravelMultiplier.toFixed(2)}x`;
+            } else {
+                gameState.legitimacy = Math.max(25, gameState.legitimacy - 6);
+                logMsg = `⚠️ WARP FEHLGESCHLAGEN! Negative Energie destabilisiert. Ressourcen verloren.`;
+                document.getElementById('warp-last-action').innerHTML = `Fehlschlag. Legitimität reduziert.`;
+            }
+
+            addLog(logMsg);
+            updateResources();
+            modal.remove();
+        }
+
+        // ==================== CRYSTAL PRISM VORTEX ====================
+
+        const A0_BASE = 3700.0;
+
+        function vortexVelocity(R, V_flat, alpha, r_scale) {
+            return alpha * V_flat * (1 - Math.exp(-R / Math.max(r_scale, 0.01)));
+        }
+
+        function computePrismBoost(alpha, r_scale, V_flat) {
+            const r_transition = (V_flat * V_flat) / A0_BASE;
+            const vortex = vortexVelocity(r_transition, V_flat, alpha, r_scale);
+            return Math.min(1.35, 1 + 0.12 * (vortex / Math.max(V_flat, 1)));
+        }
+
+        function openPrismSimulator() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[9999]';
+            modal.innerHTML = `
+                <div class="warp-card p-6 rounded-xl max-w-[920px] w-[95%] max-h-[92vh] overflow-auto text-violet-300" style="border-color:#a855f7;">
+                    <h2 class="text-3xl font-orbitron text-center mb-1">🔮 CRYSTAL PRISM v45</h2>
+                    <p class="text-center text-sm mb-4">SPARC Vortex Corridor — α ≈ 1.0 universal</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold mb-3">Parameter</h4>
+                            <div class="mb-4">
+                                <label class="block text-xs">α (Vortex-Kopplung): <span id="alpha-val">${gameState.prismAlpha.toFixed(2)}</span></label>
+                                <input type="range" id="prism-alpha" min="0.5" max="2.0" step="0.05" value="${gameState.prismAlpha}" class="warp-slider w-full">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-xs">r<sub>scale</sub> (kpc): <span id="rscale-val">${gameState.prismRscale.toFixed(1)}</span></label>
+                                <input type="range" id="prism-rscale" min="0.5" max="30" step="0.5" value="${gameState.prismRscale}" class="warp-slider w-full">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-xs">V<sub>flat</sub> (km/s): <span id="vflat-val">120</span></label>
+                                <input type="range" id="prism-vflat" min="40" max="300" step="5" value="120" class="warp-slider w-full">
+                            </div>
+                            <button id="activate-prism-btn" class="action-button w-full bg-violet-600 text-lg py-3">
+                                VORTEX AKTIVIEREN<br><span class="text-xs">(Kosten: 3 Kapital + 4 Daten)</span>
+                            </button>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-3">Live (SPARC-Modell)</h4>
+                            <div id="prism-live-results" class="warp-result text-sm" style="border-color:#a855f7;"></div>
+                            <div class="text-xs bg-[#1a0a2e] p-3 rounded border border-violet-800 mt-4">
+                                <strong>v²(r) = V<sub>bar</sub>² + V<sub>vortex</sub>²</strong><br>
+                                V<sub>vortex</sub> = α·V<sub>flat</sub>·(1 − e<sup>−r/r<sub>scale</sub></sup>)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-6">
+                        <button onclick="this.closest('.fixed').remove()" class="text-sm px-6 py-2 border border-violet-700 rounded hover:bg-violet-900">Schließen</button>
+                    </div>
+                </div>`;
+            document.body.appendChild(modal);
+
+            const alphaSl = modal.querySelector('#prism-alpha');
+            const rscaleSl = modal.querySelector('#prism-rscale');
+            const vflatSl = modal.querySelector('#prism-vflat');
+            const resultsDiv = modal.querySelector('#prism-live-results');
+
+            function updatePrismLive() {
+                const a = parseFloat(alphaSl.value);
+                const r = parseFloat(rscaleSl.value);
+                const vf = parseFloat(vflatSl.value);
+                modal.querySelector('#alpha-val').textContent = a.toFixed(2);
+                modal.querySelector('#rscale-val').textContent = r.toFixed(1);
+                modal.querySelector('#vflat-val').textContent = vf;
+                const r_trans = (vf * vf) / A0_BASE;
+                const vv = vortexVelocity(r_trans, vf, a, r);
+                const boost = computePrismBoost(a, r, vf);
+                const acc = 100 - Math.abs(100 * (1 - a));
+                resultsDiv.innerHTML = `
+                    r<sub>transition</sub> = ${r_trans.toFixed(2)} kpc<br>
+                    V<sub>vortex</sub> = ${vv.toFixed(1)} km/s<br>
+                    Transit-Boost: ${boost.toFixed(2)}x<br>
+                    Universal-α Nähe: ${acc.toFixed(0)}% (α=1 ideal)`;
+            }
+            alphaSl.oninput = updatePrismLive;
+            rscaleSl.oninput = updatePrismLive;
+            vflatSl.oninput = updatePrismLive;
+            updatePrismLive();
+
+            modal.querySelector('#activate-prism-btn').onclick = () => {
+                activatePrismFromModal(modal, parseFloat(alphaSl.value), parseFloat(rscaleSl.value), parseFloat(vflatSl.value));
+            };
+        }
+
+        function activatePrismFromModal(modal, alpha, r_scale, V_flat) {
+            if (gameState.capital < 3 || gameState.data < 4) {
+                alert('Nicht genug Ressourcen! Benötigt: 3 Kapital + 4 Daten');
+                return;
+            }
+            gameState.capital -= 3;
+            gameState.data -= 4;
+            gameState.prismAlpha = alpha;
+            gameState.prismRscale = r_scale;
+
+            const boost = computePrismBoost(alpha, r_scale, V_flat);
+            const alphaOk = Math.abs(alpha - 1.0) < 0.35;
+            const successRate = Math.min(92, Math.floor(70 + (alphaOk ? 15 : 0) + r_scale * 0.3));
+            const success = Math.random() * 100 < successRate;
+
+            if (success) {
+                gameState.prismBoost = Math.min(1.35, gameState.prismBoost * boost);
+                gameState.prismLevel = Math.min(5, gameState.prismLevel + 1);
+                gameState.settlementProgress = Math.min(100, gameState.settlementProgress + 6);
+                gameState.warpTravelMultiplier = Math.max(0.25, gameState.warpTravelMultiplier - 0.04);
+                addLog(`✅ PRISM VORTEX! α=${alpha.toFixed(2)} | Boost ${gameState.prismBoost.toFixed(2)}x | Level ${gameState.prismLevel}`);
+                document.getElementById('prism-last-action').innerHTML = `Vortex kohärent. Transit-Boost: ${gameState.prismBoost.toFixed(2)}x`;
+            } else {
+                gameState.data = Math.max(0, gameState.data - 1);
+                addLog('⚠️ PRISM DEKOHÄRENZ — Spin-Ausrichtung verloren.');
+                document.getElementById('prism-last-action').innerHTML = 'Dekohärenz. Datenspeicher -1.';
+            }
+            updateResources();
+            modal.remove();
+        }
+
+        // ==================== DWARF LANDER + QUIZ + MANHUNT + AVATAR + CHAT ====================
+
+        let lander = { active: false, x: 200, y: 30, vy: 0, landed: false };
+        let landerAnim = null;
+
+        function drawLander() {
+            const canvas = document.getElementById('lander-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#000814';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#8b4513';
+            ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
+            ctx.fillStyle = lander.landed ? '#22c55e' : '#00ffff';
+            ctx.beginPath();
+            ctx.moveTo(lander.x, lander.y);
+            ctx.lineTo(lander.x - 15, lander.y + 25);
+            ctx.lineTo(lander.x + 15, lander.y + 25);
+            ctx.closePath();
+            ctx.fill();
+            if (lander.active && !lander.landed && lander.vy < 0) {
+                ctx.fillStyle = '#f97316';
+                ctx.fillRect(lander.x - 4, lander.y + 25, 8, 12);
+            }
+        }
+
+        function landerStep() {
+            if (!lander.active || lander.landed) return;
+            lander.vy += 0.08;
+            lander.y += lander.vy;
+            if (lander.y >= 155) {
+                lander.y = 155;
+                if (Math.abs(lander.vy) < 1.2) {
+                    lander.landed = true;
+                    lander.active = false;
+                    gameState.settlementProgress = Math.min(100, gameState.settlementProgress + 8);
+                    addLog('DWARF: Sichere Landung! Settlement +8%.');
+                } else {
+                    lander.active = false;
+                    gameState.personnel = Math.max(0, gameState.personnel - 5);
+                    addLog('DWARF: Harte Landung! Personal -5.');
+                }
+                cancelAnimationFrame(landerAnim);
+            }
+            drawLander();
+            landerAnim = requestAnimationFrame(landerStep);
+        }
+
+        function startDwarfEngine() {
+            lander = { active: true, x: 200, y: 30, vy: 0, landed: false };
+            addLog('DWARF Engine aktiviert. Pfeil ↑ für Schub.');
+            drawLander();
+            landerStep();
+        }
+
+        const quizData = [
+            { q: 'Geschätzte Mars-Reisezeit mit konventionellem Antrieb?', opts: ['3 Tage', '7 Monate', '2 Jahre', '40 Minuten'], img: 'https://picsum.photos/seed/mars1/80/80', ans: 1 },
+            { q: 'Welcher Vertrag sichert friedliche Raumfahrt?', opts: ['NATO', 'ARTEMIS Accords', 'Schengen', 'Maastricht'], img: 'https://picsum.photos/seed/mars2/80/80', ans: 1 },
+            { q: 'SPARC-Datenbank misst primär…', opts: ['Galaxien-Rotationskurven', 'Mars-Temperatur', 'QR-Codes', 'Louvre-Artefakte'], img: 'https://picsum.photos/seed/mars3/80/80', ans: 0 }
+        ];
+        let quizIdx = 0;
+
+        function renderQuiz() {
+            const q = quizData[quizIdx % quizData.length];
+            document.getElementById('quiz-container').innerHTML = `
+                <p class="mb-4 font-bold">${q.q}</p>
+                ${q.opts.map((o, i) => `
+                    <label class="option-label mb-2 block">
+                        <input type="radio" name="quiz-opt" value="${i}">
+                        <img src="${q.img}" class="option-img" alt="">
+                        <span>${o}</span>
+                    </label>`).join('')}`;
+        }
+
+        const chatReplies = [
+            (m) => m.toLowerCase().includes('portugal') ? 'Portugal unterzeichnete die ARTEMIS Accords — Frieden auf Mond, Mars und darüber hinaus. 🇵🇹🚀' : null,
+            (m) => m.toLowerCase().includes('prism') || m.toLowerCase().includes('vortex') ? 'CRYSTAL PRISM v45: 175 SPARC-Galaxien, α≈1.0, kein Dunkle-Materie-Fitting. Vortex = rotierende Baryonen.' : null,
+            (m) => m.toLowerCase().includes('warp') ? 'Alcubierre-Warp: Shaping-f(r), York-Zeit θ, negative ρ. Im Spiel: hohes Risiko, hoher Settlement-Boost.' : null,
+            (m) => m.toLowerCase().includes('stargaze') || m.toLowerCase().includes('starlink') ? 'Stargaze SSA: kostenlose Konjunktionsdaten für alle Operatoren — wie SPARC für Galaxien, nur für Satelliten.' : null,
+            () => 'Kommandant, ich analysiere. Frage nach: Prism, Warp, ARTEMIS, Stargaze, Mars.'
+        ];
+
+        function botReply(msg) {
+            for (const fn of chatReplies) {
+                const r = fn(msg);
+                if (r) return r;
+            }
+            return chatReplies[chatReplies.length - 1]();
+        }
+
+        function calcScore() {
+            return Math.round(
+                gameState.settlementProgress * 2 +
+                gameState.legitimacy +
+                gameState.prismLevel * 20 +
+                gameState.warpLevel * 25 +
+                (1 / gameState.warpTravelMultiplier) * 10
+            );
+        }
+
+        // ==================== ENDE WARP INTEGRATION ====================
+
+        // Event Listeners (bestehende + Warp + Prism)
+        document.getElementById('open-warp').addEventListener('click', () => {
+            document.getElementById('warp-section').classList.toggle('hidden');
+            if (!document.getElementById('warp-section').classList.contains('hidden')) {
+                addLog('Warp Drive Simulator geöffnet.');
+            }
+        });
+
+        document.getElementById('warp-activate-btn').addEventListener('click', openWarpSimulator);
+
+        document.getElementById('open-prism').addEventListener('click', () => {
+            document.getElementById('prism-section').classList.toggle('hidden');
+            if (!document.getElementById('prism-section').classList.contains('hidden')) {
+                addLog('Crystal Prism Corridor geöffnet. 🔮');
+            }
+        });
+        document.getElementById('prism-activate-btn').addEventListener('click', openPrismSimulator);
+        document.getElementById('start-gambit').addEventListener('click', async () => {
+            if (gameState.capital < 5) { alert('Kapital zu niedrig für Gambit. Benötigt: 5 Mrd.'); return; }
+            gameState.round++; gameState.capital -= 5;
+            const isSuccess = Math.random() < 0.75;
+            if (isSuccess) {
+                gameState.legitimacy += 15; gameState.data += 1;
+                addLog(`Runde ${gameState.round}: Gambit erfolgreich! +15 Legitimität.`);
+            } else {
+                gameState.legitimacy -= 5; gameState.personnel -= 5;
+                addLog(`Runde ${gameState.round}: Gambit fehlgeschlagen. -5 Legitimität & Personal.`);
+            }
+            updateResources();
+        });
+
+        document.getElementById('sos-button').addEventListener('click', () => {
+            addLog('SOS-Signal gesendet: Hilfsressourcen incoming (Kapital +2).');
+            gameState.capital += 2; gameState.legitimacy -= 3; updateResources();
+        });
+
+        document.getElementById('explore-button').addEventListener('click', () => {
+            if (gameState.data < 2) { alert('Daten zu niedrig.'); return; }
+            gameState.data -= 2;
+            gameState.settlementProgress += 12;
+            if (gameState.settlementProgress > 100) gameState.settlementProgress = 100;
+            addLog('Neuer Sektor erkundet: Settlement Progress +12%.');
+            updateResources();
+        });
+
+        document.getElementById('reset-button').addEventListener('click', () => {
+            gameState = {...initialState};
+            document.getElementById('log-list').innerHTML = '<li>Runde 1 initialisiert: Mars-Kolonie etabliert. 🚀</li>';
+            updateResources(); alert('Spiel zurückgesetzt.');
+        });
+
+        document.getElementById('enter-cockpit').addEventListener('click', () => {
+            document.getElementById('cockpit-section').classList.toggle('hidden');
+        });
+
+        document.getElementById('open-avatar-creator').addEventListener('click', () => {
+            document.getElementById('avatar-creator-section').classList.toggle('hidden');
+        });
+        
+        document.getElementById('open-manhunt').addEventListener('click', () => {
+            document.getElementById('manhunt-section').classList.toggle('hidden');
+        });
+
+        document.getElementById('open-old-earth').addEventListener('click', () => {
+            document.getElementById('old-earth-section').classList.toggle('hidden');
+        });
+
+        document.getElementById('open-quiz').addEventListener('click', () => {
+            document.getElementById('quiz-section').classList.toggle('hidden');
+            if (!document.getElementById('quiz-section').classList.contains('hidden')) renderQuiz();
+        });
+
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+            const sel = document.querySelector('input[name="quiz-opt"]:checked');
+            const q = quizData[quizIdx % quizData.length];
+            const fb = document.getElementById('quiz-feedback');
+            if (!sel) { fb.textContent = 'Bitte eine Option wählen.'; return; }
+            if (parseInt(sel.value) === q.ans) {
+                gameState.data += 1;
+                gameState.legitimacy = Math.min(100, gameState.legitimacy + 3);
+                fb.textContent = 'Korrekt! +1 Daten, +3 Legitimität.';
+                quizIdx++;
+                renderQuiz();
+            } else {
+                fb.textContent = 'Falsch. Evident Facts Gambit: nochmal lesen!';
+            }
+            updateResources();
+        });
+
+        document.getElementById('dwarf-engine').addEventListener('click', startDwarfEngine);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp' && lander.active && !lander.landed) {
+                lander.vy -= 0.35;
+                drawLander();
+            }
+        });
+
+        document.getElementById('submit-w-questions').addEventListener('click', () => {
+            if (gameState.data < 5) { alert('Nicht genug Daten (-5).'); return; }
+            const motive = document.getElementById('w-question').value;
+            const wer = document.getElementById('w-wer').value.trim();
+            if (motive === 'none' || !wer) { alert('Motiv und Wer ausfüllen.'); return; }
+            gameState.data -= 5;
+            const hit = motive === 'dynasty' && wer.length > 3;
+            gameState.manhuntProgress = Math.min(100, gameState.manhuntProgress + (hit ? 18 : 8));
+            addLog(hit ? 'MANHUNT: Dynastie-Spur bestätigt! +18%.' : 'MANHUNT: Spur analysiert. +8%.');
+            updateResources();
+        });
+
+        document.getElementById('scan-qr-tag').addEventListener('click', () => {
+            if (gameState.capital < 3) { alert('Kapital zu niedrig (-3).'); return; }
+            gameState.capital -= 3;
+            gameState.manhuntProgress = Math.min(100, gameState.manhuntProgress + 12);
+            addLog('QR-Geo-Spur: Position Fontainebleau-Korridor.');
+            updateResources();
+        });
+
+        document.getElementById('submit-humint').addEventListener('click', () => {
+            const loc = document.getElementById('social-media-input').value.trim();
+            if (!loc) { alert('Ort/Datum eingeben.'); return; }
+            gameState.manhuntProgress = Math.min(100, gameState.manhuntProgress + 10);
+            addLog(`HUMINT: Blog-Eintrag ${loc} verknüpft. +10%.`);
+            updateResources();
+        });
+
+        document.getElementById('generate-3d-file').addEventListener('click', () => {
+            const name = document.getElementById('avatar-name').value.trim() || 'CHIMERA';
+            const qr = document.getElementById('qr-code-id').value || '1';
+            const blob = new Blob([`solid ${name}\nendsolid ${name}\n`], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            document.getElementById('download-link').href = url;
+            document.getElementById('download-link').download = `${name}_qr${qr}.stl`;
+            document.getElementById('download-link-container').classList.remove('hidden');
+            addLog(`Avatar STL für ${name} (QR ${qr}) generiert.`);
+        });
+
+        document.getElementById('avatar-photo').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                document.getElementById('avatar-preview').innerHTML = `<img src="${ev.target.result}" class="h-full w-full object-cover rounded-md" alt="preview">`;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById('save-score').addEventListener('click', () => {
+            const name = document.getElementById('player-name').value.trim() || 'Kommandant';
+            const score = calcScore();
+            const rankings = JSON.parse(localStorage.getItem('chimeraRankings')) || [];
+            rankings.push({ name, score, date: new Date().toLocaleDateString('de-DE') });
+            localStorage.setItem('chimeraRankings', JSON.stringify(rankings));
+            loadRanking();
+            addLog(`Score ${score} für ${name} gespeichert.`);
+        });
+
+        document.getElementById('chatbot-button').addEventListener('click', () => {
+            document.getElementById('chatbot-window').classList.toggle('hidden');
+        });
+        document.getElementById('send-chat').addEventListener('click', () => {
+            const input = document.getElementById('chat-input');
+            const msg = input.value.trim();
+            if (!msg) return;
+            const box = document.getElementById('chat-messages');
+            box.innerHTML += `<p class="user-msg">${msg}</p>`;
+            box.innerHTML += `<p class="bot-msg">${botReply(msg)}</p>`;
+            input.value = '';
+            box.scrollTop = box.scrollHeight;
+        });
+        document.getElementById('chat-input').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') document.getElementById('send-chat').click();
+        });
+
+        updateResources();
+        addLog('Triple-Engine online: DWARF · CRYSTAL PRISM · Alcubierre.');
+        addLog('Live-Mirror: blizzwar.vercel.app ≡ blizzwar-2026.vercel.app');
+    </script>
+</body>
+</html>
