@@ -1,9 +1,19 @@
 <!DOCTYPE html>
+<!-- GitHub Pages: https://rosary-mom.github.io/Crystal-Prism-Praxis-/blitzkrieg.html -->
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLIZZWAR©®™ 2026 ff,  v2.6 • Golden Age Mars</title>
+    <title>BLIZZWAR v2.6 — Crystal Prism Praxis | Golden Age Mars</title>
+    <link rel="canonical" href="https://rosary-mom.github.io/Crystal-Prism-Praxis-/blitzkrieg.html">
+    <script>
+        window.cppHref = function (file) {
+            const parts = location.pathname.split('/').filter(Boolean);
+            const i = parts.findIndex(function (p) { return p.toLowerCase() === 'crystal-prism-praxis-'; });
+            const base = i >= 0 ? '/' + parts.slice(0, i + 1).join('/') + '/' : './';
+            return base + String(file).replace(/^\//, '');
+        };
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -33,7 +43,7 @@
     </div>
 
     <div class="max-w-[1380px] mx-auto px-6 pt-8 pb-12">
-        <div class="flex items-end justify-between mb-8"><button onclick="window.location.href='index.html'" class="px-7 py-3.5 bg-slate-800 hover:bg-slate-700 rounded-3xl font-semibold text-sm transition-colors border border-slate-600"><i class="fa-solid fa-arrow-left mr-2"></i> CLASSIC DASHBOARD</button>
+        <div class="flex items-end justify-between mb-8"><button onclick="window.location.href=cppHref('index.html')" class="px-7 py-3.5 bg-slate-800 hover:bg-slate-700 rounded-3xl font-semibold text-sm transition-colors border border-slate-600"><i class="fa-solid fa-arrow-left mr-2"></i> CLASSIC DASHBOARD</button>
             <div class="flex items-center gap-x-5">
                 <div class="w-16 h-16 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 rounded-3xl flex items-center justify-center shadow-2xl aether-glow">
                     <i class="fa-solid fa-infinity text-5xl text-black"></i>
