@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOL · Ewige CatClock — Katzenuhr | Crystal Prism Praxis</title>
+  <meta name="description" content="SOL Elements: Katzenuhr mit Lorentz-Zeitdilatation. Erde vs. Reisender. DEGERFELD Ground Truth. Magnifica Humanitas.">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cyan: #00ffff;
+      --gold: #c9a86c;
+      --bg: #050a12;
+      --panel: rgba(0, 20, 40, 0.92);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Roboto Mono", monospace;
+      background: radial-gradient(ellipse at 30% 20%, #0a2030, var(--bg) 60%);
+      color: var(--cyan);
+      padding: 1.25rem;
+    }
+    h1, h2 { font-family: Orbitron, sans-serif; letter-spacing: 0.06em; }
+    a { color: var(--gold); }
+    .wrap { max-width: 960px; margin: 0 auto; }
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(0,255,255,0.4);
+      border-radius: 12px;
+      padding: 1.25rem 1.4rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 24px rgba(0,255,255,0.12);
+    }
+    .grid { display: grid; gap: 1rem; }
+    @media (min-width: 700px) {
+      .grid.two { grid-template-columns: 1fr 1fr; }
+      .grid.three { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    .clock-face {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 700;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 8px;
+      background: #001018;
+      border: 1px solid rgba(0,255,255,0.35);
+      font-variant-numeric: tabular-nums;
+    }
+    .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.75; text-align: center; margin-bottom: 0.4rem; }
+    .cat {
+      font-size: 2.5rem;
+      text-align: center;
+      line-height: 1;
+      transition: transform 0.15s linear;
+    }
+    input[type=range] { width: 100%; accent-color: var(--cyan); }
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.1rem;
+      border: 1px solid var(--cyan);
+      background: rgba(0,80,90,0.5);
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 700;
+      margin: 0.25rem 0.35rem 0.25rem 0;
+    }
+    .btn:hover { background: rgba(0,120,130,0.65); }
+    .btn.gold { border-color: var(--gold); color: var(--gold); }
+    .muted { opacity: 0.7; font-size: 0.85rem; line-height: 1.5; }
+    .stat { font-size: 0.9rem; margin: 0.35rem 0; }
+    .pill {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+    .mode-on { box-shadow: 0 0 20px rgba(201,168,108,0.35); border-color: var(--gold); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel">
+      <span class="pill">SOL ELEMENTS · PRIVAT → PUBLIC</span>
+      <h1 style="margin:0 0 0.4rem;font-size:1.35rem;color:#fff;">Ewige CatClock · Katzenuhr</h1>
+      <p class="muted" style="margin:0;">
+        Nach <a href="https://rosary.health/der-koenig-der-raumfahrt/" target="_blank" rel="noopener">Der König der Raumfahrt</a>
+        · Uhren der Ewigkeit · DEGERFELD Spaceport Ground Truth · Lorentz-Dilatation.
+        Zwei Katzen: Erde vs. Reisender. Baumeister, nicht Zuschauer.
+      </p>
+      <p class="muted" style="margin:0.6rem 0 0;">
+        <a href="../index.html">← Crystal Prism Praxis</a> ·
+        <a href="https://rosary-mom.github.io/Crystal-Prism-Praxis-/">Live Pages</a>
+      </p>
+    </div>
+
+    <div class="panel">
+      <h2 style="font-size:1rem;margin:0 0 0.75rem;color:var(--gold);">1 · DEGERFELD Realzeit (Ground Truth)</h2>
+      <div class="label">Europe/Berlin · 880 m NN · unveränderliche Referenz</div>
+      <div class="clock-face" id="degerfeld-clock">--:--:--</div>
+      <div class="stat" id="degerfeld-date" style="text-align:center;margin-top:0.5rem;"></div>
+    </div>
+
+    <div class="panel" id="mode-panel">
+      <h2 style="font-size:1rem;margin:0 0 0.75rem;color:var(--gold);">2 · Katzenuhren (Sober / Dilatation)</h2>
+      <div class="stat">
+        <label>
+          <input type="checkbox" id="dilation-toggle"> Dilatation AKTIV (Jungbrunnen / Lorentz)
+        </label>
+      </div>
+      <div class="stat">
+        v/c = <span id="beta-label">0.00</span>
+        <input type="range" id="beta" min="0" max="99" value="0" step="1">
+      </div>
+      <div class="stat">
+        γ (Lorentz) = <span id="gamma-label">1.000</span> ·
+        Eigenzeit-Faktor = <span id="proper-label">1.000</span>
+      </div>
+
+      <div class="grid two" style="margin-top:1rem;">
+        <div>
+          <div class="label">Cat A · Erde (irdische Zeit)</div>
+          <div class="cat" id="cat-earth">🐈</div>
+          <div class="clock-face" id="clock-earth">00:00:00.0</div>
+          <div class="stat" style="text-align:center;">Jahre sim.: <span id="years-earth">0.00</span></div>
+        </div>
+        <div>
+          <div class="label">Cat A′ · Reisender (Eigenzeit)</div>
+          <div class="cat" id="cat-ship">🐱</div>
+          <div class="clock-face" id="clock-ship">00:00:00.0</div>
+          <div class="stat" style="text-align:center;">Jahre sim.: <span id="years-ship">0.00</span></div>
+        </div>
+      </div>
+
+      <div style="margin-top:1rem;">
+        <button type="button" class="btn" id="btn-start">Simulation starten</button>
+        <button type="button" class="btn" id="btn-pause">Pause</button>
+        <button type="button" class="btn" id="btn-reset">Zurücksetzen</button>
+        <button type="button" class="btn gold" id="btn-apply">In Mars Mission übernehmen</button>
+      </div>
+      <p class="muted" id="jungbrunnen-msg" style="margin-top:0.75rem;">
+        Sober-Modus: beide Katzen ticken gleich (Schrödinger-Falle der linearen Zeit).
+      </p>
+    </div>
+
+    <div class="panel">
+      <h2 style="font-size:1rem;margin:0 0 0.5rem;color:var(--gold);">3 · SOL-Status für Crystal Prism</h2>
+      <div class="stat">Jungbrunnen-Jahre (Erde − Eigenzeit): <strong id="jb-years">0.00</strong></div>
+      <div class="stat">Empfohlener Missions-Bonus (Legitimität / Settlement): <strong id="bonus-hint">+0</strong></div>
+      <p class="muted">
+        Spekulative Bildungs- &amp; Magnifica-Synthese — keine medizinische Beratung.
+        Quelle: <a href="https://rosary.health/der-koenig-der-raumfahrt/" target="_blank" rel="noopener">rosary.health · König der Raumfahrt</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      let running = false;
+      let lastTs = null;
+      let tEarth = 0; // seconds simulated (sped up)
+      let tShip = 0;
+      const SPEED = 3600 * 24 * 30; // 1 real sec ≈ 30 sim days
+
+      function gamma(beta) {
+        if (beta >= 1) return Infinity;
+        return 1 / Math.sqrt(1 - beta * beta);
+      }
+
+      function fmt(sec) {
+        const s = Math.max(0, sec);
+        const h = Math.floor(s / 3600) % 100;
+        const m = Math.floor((s % 3600) / 60);
+        const ss = s % 60;
+        return String(h).padStart(2, "0") + ":" +
+          String(m).padStart(2, "0") + ":" +
+          ss.toFixed(1).padStart(4, "0");
+      }
+
+      function years(sec) { return sec / (3600 * 24 * 365.25); }
+
+      function updateDegerfeld() {
+        const now = new Date();
+        const fmtTime = new Intl.DateTimeFormat("de-DE", {
+          timeZone: "Europe/Berlin",
+          hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
+        }).format(now);
+        const fmtDate = new Intl.DateTimeFormat("de-DE", {
+          timeZone: "Europe/Berlin",
+          weekday: "long", year: "numeric", month: "long", day: "numeric"
+        }).format(now);
+        $("degerfeld-clock").textContent = fmtTime + " CET/CEST";
+        $("degerfeld-date").textContent = fmtDate + " · DEGERFELD SPACEPORT";
+      }
+
+      function readBeta() {
+        return Number($("beta").value) / 100;
+      }
+
+      function refreshPhysics() {
+        const dil = $("dilation-toggle").checked;
+        const beta = readBeta();
+        const g = dil ? gamma(beta) : 1;
+        $("beta-label").textContent = beta.toFixed(2);
+        $("gamma-label").textContent = isFinite(g) ? g.toFixed(3) : "∞";
+        $("proper-label").textContent = isFinite(g) ? (1 / g).toFixed(3) : "0";
+        $("mode-panel").classList.toggle("mode-on", dil && beta > 0);
+      }
+
+      function tick(ts) {
+        if (!running) return;
+        if (lastTs == null) lastTs = ts;
+        const dt = (ts - lastTs) / 1000;
+        lastTs = ts;
+
+        const dil = $("dilation-toggle").checked;
+        const beta = readBeta();
+        const g = dil && beta > 0 ? gamma(beta) : 1;
+
+        tEarth += dt * SPEED;
+        tShip += dil ? (dt * SPEED / g) : (dt * SPEED);
+
+        $("clock-earth").textContent = fmt(tEarth);
+        $("clock-ship").textContent = fmt(tShip);
+        $("years-earth").textContent = years(tEarth).toFixed(2);
+        $("years-ship").textContent = years(tShip).toFixed(2);
+
+        const wobbleE = Math.sin(ts / 180) * 6;
+        const wobbleS = Math.sin(ts / (180 * (dil ? g : 1))) * 6;
+        $("cat-earth").style.transform = "rotate(" + wobbleE + "deg)";
+        $("cat-ship").style.transform = "rotate(" + wobbleS + "deg) scale(" + (dil ? Math.max(0.85, 1 / Math.sqrt(g)) : 1) + ")";
+
+        const jb = Math.max(0, years(tEarth) - years(tShip));
+        $("jb-years").textContent = jb.toFixed(2);
+        const bonus = Math.min(15, Math.floor(jb * 2));
+        $("bonus-hint").textContent = "+" + bonus;
+
+        if (dil && beta > 0) {
+          $("jungbrunnen-msg").textContent =
+            "Dilatation aktiv: Cat A′ altert langsamer (γ=" + g.toFixed(3) +
+            "). Jungbrunnen ≈ " + jb.toFixed(2) + " Jahre Vorsprung.";
+        } else {
+          $("jungbrunnen-msg").textContent =
+            "Sober-Modus: beide Katzen ticken gleich (lineare Zeit / Schrödinger-Falle).";
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      $("btn-start").onclick = function () {
+        if (running) return;
+        running = true;
+        lastTs = null;
+        requestAnimationFrame(tick);
+      };
+      $("btn-pause").onclick = function () { running = false; lastTs = null; };
+      $("btn-reset").onclick = function () {
+        running = false; lastTs = null;
+        tEarth = 0; tShip = 0;
+        $("clock-earth").textContent = "00:00:00.0";
+        $("clock-ship").textContent = "00:00:00.0";
+        $("years-earth").textContent = "0.00";
+        $("years-ship").textContent = "0.00";
+        $("jb-years").textContent = "0.00";
+        $("bonus-hint").textContent = "+0";
+      };
+      $("beta").oninput = refreshPhysics;
+      $("dilation-toggle").onchange = refreshPhysics;
+
+      $("btn-apply").onclick = function () {
+        const jb = Math.max(0, years(tEarth) - years(tShip));
+        const bonus = Math.min(15, Math.floor(jb * 2));
+        const payload = {
+          type: "SOL_CATCLOCK_APPLY",
+          jungbrunnenYears: jb,
+          legitimacyBonus: bonus,
+          settlementBonus: Math.min(10, Math.floor(jb)),
+          beta: readBeta(),
+          dilation: $("dilation-toggle").checked,
+          ts: Date.now()
+        };
+        try {
+          localStorage.setItem("solCatClock", JSON.stringify(payload));
+        } catch (e) {}
+        if (window.opener && !window.opener.closed) {
+          try { window.opener.postMessage(payload, "*"); } catch (e) {}
+        }
+        alert("SOL übernommen: Jungbrunnen " + jb.toFixed(2) + " a · Bonus Legitimität +" + bonus +
+          (window.opener ? "\n(an Crystal Prism gesendet)" : "\n(in localStorage gespeichert — im Hauptspiel laden)"));
+      };
+
+      setInterval(updateDegerfeld, 250);
+      updateDegerfeld();
+      refreshPhysics();
+    })();
+  </script>
+</body>
+</html>

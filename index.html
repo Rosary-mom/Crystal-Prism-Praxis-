@@ -171,6 +171,8 @@
             <button id="open-old-earth" class="action-button bg-indigo-600/60">Old Earth Schemes 🌍</button>
             <button id="open-prism" class="action-button bg-violet-700/60 font-bold">Crystal Prism Corridor 🔮</button>
             <button id="open-warp" class="action-button bg-cyan-700/60 font-bold">Warp Drive Simulator 🌀</button>
+            <button id="open-sol" class="action-button bg-amber-600/70 font-bold border-amber-400">SOL · CatClock 🐈</button>
+            <button type="button" onclick="window.open(cppHref('sol-elements/catclock.html'),'solcat','width=980,height=820')" class="action-button bg-amber-900/50 border-amber-500">Ewige Katzenuhr ⏱️</button>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -399,6 +401,41 @@
             <div id="quiz-container"></div>
             <button id="submit-quiz" class="action-button mt-4">Antwort überprüfen</button>
             <div id="quiz-feedback" class="mt-4 text-cyan-400"></div>
+        </div>
+
+        <!-- SOL Elements — from rosary.health (König der Raumfahrt / Uhren der Ewigkeit) -->
+        <div id="sol-section" class="cockpit-card mb-8 hidden" style="border-color:rgba(201,168,108,0.55);">
+            <h2 class="text-3xl font-orbitron mb-4 text-center text-amber-300">SOL Elements · Uhren der Ewigkeit</h2>
+            <p class="text-center text-sm mb-4 text-cyan-200/90 max-w-3xl mx-auto">
+                Privat freigegebene SOL-Bausteine aus dem Blog
+                <a class="underline text-amber-300" href="https://rosary.health/der-koenig-der-raumfahrt/" target="_blank" rel="noopener">Der König der Raumfahrt</a>:
+                DEGERFELD-Realzeit · Sober-Uhren · <strong>Katzenuhr / Ewige CatClock</strong> mit Lorentz-Dilatation (Jungbrunnen).
+            </p>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+                <div class="resource-card text-center">
+                    <h3 class="font-orbitron text-amber-300 mb-2">DEGERFELD Ground Truth</h3>
+                    <p class="text-2xl font-bold" id="sol-degerfeld-live">--:--:--</p>
+                    <p class="text-xs text-gray-400 mt-1">Europe/Berlin · Spaceport 880 m NN</p>
+                </div>
+                <div class="resource-card text-center">
+                    <h3 class="font-orbitron text-amber-300 mb-2">Jungbrunnen (Jahre)</h3>
+                    <p class="text-2xl font-bold text-green-400" id="sol-jb-years">0.00</p>
+                    <p class="text-xs text-gray-400 mt-1">Erde − Eigenzeit (aus CatClock)</p>
+                </div>
+                <div class="resource-card text-center">
+                    <h3 class="font-orbitron text-amber-300 mb-2">SOL Bonus</h3>
+                    <p class="text-2xl font-bold text-yellow-300" id="sol-bonus">+0</p>
+                    <p class="text-xs text-gray-400 mt-1">Legitimität / Settlement-Boost</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap justify-center gap-3 mb-4">
+                <button type="button" class="action-button bg-amber-700/70" onclick="window.open(cppHref('sol-elements/catclock.html'),'solcat','width=980,height=820')">🐈 CatClock öffnen</button>
+                <button type="button" id="sol-load-bonus" class="action-button bg-green-800/60">SOL-Bonus ins Spiel laden</button>
+                <a class="action-button bg-gray-700/50 inline-block text-center" href="https://rosary.health/der-koenig-der-raumfahrt/" target="_blank" rel="noopener">Blog: König der Raumfahrt</a>
+            </div>
+            <ul id="sol-log" class="text-sm space-y-1 max-h-28 overflow-y-auto text-cyan-100/80">
+                <li>SOL-Modul bereit. Starte CatClock, aktiviere Dilatation, übernehme Bonus.</li>
+            </ul>
         </div>
 
         <div id="old-earth-section" class="simulation-card mb-8 hidden">
@@ -980,6 +1017,54 @@
             document.getElementById('quiz-section').classList.toggle('hidden');
             if (!document.getElementById('quiz-section').classList.contains('hidden')) renderQuiz();
         });
+
+        // ==================== SOL ELEMENTS (CatClock / Katzenuhr) ====================
+        function solLog(msg) {
+            const ul = document.getElementById('sol-log');
+            if (!ul) return;
+            const li = document.createElement('li');
+            li.textContent = msg;
+            ul.prepend(li);
+        }
+        function refreshSolDegerfeld() {
+            const el = document.getElementById('sol-degerfeld-live');
+            if (!el) return;
+            el.textContent = new Intl.DateTimeFormat('de-DE', {
+                timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+            }).format(new Date());
+        }
+        function applySolPayload(payload) {
+            if (!payload) return;
+            const jb = Number(payload.jungbrunnenYears) || 0;
+            const leg = Number(payload.legitimacyBonus) || Math.min(15, Math.floor(jb * 2));
+            const setB = Number(payload.settlementBonus) || Math.min(10, Math.floor(jb));
+            document.getElementById('sol-jb-years').textContent = jb.toFixed(2);
+            document.getElementById('sol-bonus').textContent = '+' + leg;
+            gameState.legitimacy = Math.min(100, gameState.legitimacy + leg);
+            gameState.settlementProgress = Math.min(100, gameState.settlementProgress + setB);
+            if (typeof updateResources === 'function') updateResources();
+            solLog('SOL geladen: Jungbrunnen ' + jb.toFixed(2) + ' a · Legitimität +' + leg + ' · Settlement +' + setB + '%');
+            addLog('SOL CatClock: Jungbrunnen-Bonus übernommen (+' + leg + ' Legitimität).');
+        }
+        document.getElementById('open-sol').addEventListener('click', () => {
+            document.getElementById('sol-section').classList.toggle('hidden');
+            if (!document.getElementById('sol-section').classList.contains('hidden')) {
+                addLog('SOL Elements geöffnet — Katzenuhr / Uhren der Ewigkeit.');
+                refreshSolDegerfeld();
+            }
+        });
+        document.getElementById('sol-load-bonus').addEventListener('click', () => {
+            try {
+                const raw = localStorage.getItem('solCatClock');
+                if (!raw) { alert('Kein CatClock-Ergebnis. Öffne CatClock, simuliere, dann „In Mars Mission übernehmen“.'); return; }
+                applySolPayload(JSON.parse(raw));
+            } catch (e) { alert('SOL-Daten ungültig.'); }
+        });
+        window.addEventListener('message', (ev) => {
+            if (ev.data && ev.data.type === 'SOL_CATCLOCK_APPLY') applySolPayload(ev.data);
+        });
+        setInterval(refreshSolDegerfeld, 1000);
+        // ==================== ENDE SOL ====================
 
         document.getElementById('submit-quiz').addEventListener('click', () => {
             const sel = document.querySelector('input[name="quiz-opt"]:checked');

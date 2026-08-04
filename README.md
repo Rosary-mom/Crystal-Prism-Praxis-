@@ -19,6 +19,7 @@
 | File | Description |
 |------|-------------|
 | [`index.html`](index.html) | **Production** — full Mars Mission cockpit (deploy this) |
+| [`sol-elements/catclock.html`](sol-elements/catclock.html) | **SOL** — Ewige CatClock / Katzenuhr (Lorentz) + DEGERFELD Realzeit |
 | [`crystal-prism-praxis-editor.html`](crystal-prism-praxis-editor.html) | **Editor copy** — identical HTML for IDE / offline edit |
 | [`mars-mission-classic.html`](mars-mission-classic.html) | Original [blizzwar.vercel.app](https://blizzwar.vercel.app/) mirror |
 | [`blitzkrieg.html`](blitzkrieg.html) | BLIZZWAR v2.6 dashboard (Aether, YRAZOR II) |
