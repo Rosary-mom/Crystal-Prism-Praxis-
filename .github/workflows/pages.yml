@@ -7,16 +7,28 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Do NOT exclude .git — peaceiris needs the gh-pages clone's git metadata.
+      # Only strip workflow sources from the published tree.
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .
-          keep_files: false
-          exclude_assets: '.github,.git'
+          publish_branch: gh-pages
+          force_orphan: true
+          enable_jekyll: false
+          exclude_assets: .github
