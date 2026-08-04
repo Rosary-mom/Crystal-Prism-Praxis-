@@ -1,0 +1,192 @@
+// Moodle Aiken format — SOL-7 · CatClock · Schrödinger · Multi-Cycle · LOGOS
+// Import: holyrosarychurch.moodlecloud.com → Fragenbank → Import → Aiken
+// Encoding: UTF-8 · Keine Leerzeile zwischen Optionen und ANSWER
+
+Beim SOL-7-Treffen blieb Kater Leo am Degerfeld SpacePort, während Elonore und Leoni reisten. Was bedeutet das für die Eigenzeit bei aktiver Lorentz-Dilatation?
+A) Alle drei Katzen haben exakt dieselbe biologische Eigenzeit.
+B) Leo hat typischerweise mehr Erdjahre / Eigenzeit am Boden als die Reisenden.
+C) Leo ist immer die jüngste Katze, weil SpacePorts die Zeit anhalten.
+D) Elonore und Leoni altern schneller als Leo, weil Reisen stressig ist.
+ANSWER: B
+
+Was beschreibt der Schrödinger-Modus in der SOL-CatClock am ehesten?
+A) Die Katzen sind real tot, bis man Futter gibt.
+B) Bis zur Beobachtung bleiben Zustände unscharf (Superposition); die Begegnung legt die Werte fest.
+C) Die Uhren laufen rückwärts.
+D) Nur Leo darf beobachtet werden.
+ANSWER: B
+
+Elonore fliegt mit höherem v/c als Leoni. Bei gleicher Missionsdauer (Erdzeit) und Dilatation gilt näherungsweise:
+A) Elonores Eigenzeit ist kürzer als Leonis (höherer γ → langsamer altern in Eigenzeit).
+B) Elonore ist immer älter als Leoni.
+C) v/c hat keinen Einfluss auf γ.
+D) Leoni muss am SpacePort bleiben.
+ANSWER: A
+
+Multi-Cycle bedeutet in der SOL-Simulation:
+A) Einmal starten und nie anhalten.
+B) Mehrere abgeschlossene Missionszyklen, die Jungbrunnen-Ersparnis kumulieren (bis SOL-7).
+C) Nur DEGERFELD-Zeit ohne Reisende.
+D) Nur Schrödinger ohne Dilatation.
+ANSWER: B
+
+Welche Aussage zu DEGERFELD SpacePort als Ground Truth ist richtig?
+A) DEGERFELD-Zeit ist die unveränderliche Realzeit-Referenz (Europe/Berlin) für den Vergleich.
+B) DEGERFELD-Zeit folgt immer nur der Reisenden-Uhr.
+C) Ground Truth bedeutet, dass keine Uhren laufen.
+D) SpacePort-Zeit ist identisch mit Warp-Eigenzeit.
+ANSWER: A
+
+Was fällt beim SOL-7-Treffen besonders auf, wenn Dilatation aktiv war?
+A) Der am Boden Gebliebene (Leo) trägt die volle Erdzeit; Reisende können biologisch „jünger“ ankommen.
+B) Alle Katzen sind gleich alt und ununterscheidbar.
+C) Schrödinger löscht alle Uhren.
+D) Nur Leoni darf den SpacePort betreten.
+ANSWER: A
+
+Welche LOGOS-Seelenkraft deutet am ehesten die Formbarkeit der Zeit und den Sinn des Vergleichs?
+A) Nur körperliche Stärke ohne Einsicht
+B) Weisheit und Erkenntnis (Zeit deuten, Unterschiede verstehen)
+C) Gleichgültigkeit
+D) Reine Technikgläubigkeit ohne Demut
+ANSWER: B
+
+Gottesfurcht als LOGOS-Kraft im SOL-Kontext meint hier vor allem:
+A) Panik vor Katzen
+B) Ehrfurcht vor dem Geheimnis von Zeit, Leben und Beobachtung (nicht technische Allmacht)
+C) Ablehnung jeder Simulation
+D) Nur Angst vor dem SpacePort
+ANSWER: B
+
+Stärke (fortitudo) wird in der Multi-Cycle-Logik besonders sichtbar, wenn:
+A) Nie ein Cycle abgeschlossen wird
+B) Mehrere Reisen/Cycles durchgehalten und ausgewertet werden
+C) Die Uhren ausgeschaltet bleiben
+D) Leo den SpacePort verlässt, ohne Grund
+ANSWER: B
+
+Frömmigkeit / Treue im Bild von Kater Leo am SpacePort steht am ehesten für:
+A) Flucht von der Erde um jeden Preis
+B) Treue zum Ort / zur Gemeinschaft, die „Ground Truth“ hält, während andere reisen
+C) Verweigerung jeder Begegnung
+D) Nur Schrödingers Unschärfe
+ANSWER: B
+
+Der „Katzenzeiger“ auf der analogen SOL-Uhr visualisiert:
+A) Den Bitcoin-Kurs
+B) Einen mitlaufenden SOL-Zeiger (Lebens-/Simulationsdial) neben klassischen Stunden-/Minuten-/Sekundenzeigern
+C) Nur die Farbe der Katze
+D) Den Moodle-Login
+ANSWER: B
+
+Was ist der Jungbrunnen-Effekt in dieser Bildungs-Simulation?
+A) Ein medizinisches Heilversprechen ohne Grenzen
+B) Die Differenz Erdjahre minus kürzere Eigenzeit der Reisenden (spekulativ-physikalisch bebildert)
+C) Ein reiner Zufallsgenerator ohne Bezug zu γ
+D) Das Abschalten von DEGERFELD
+ANSWER: B
+
+Warum ist „Beobachten (Welle)“ im Schrödinger-Modus pädagogisch wichtig?
+A) Weil sonst keine Buttons existieren
+B) Weil erst die Messung/Begegnung die unscharfen Zustände in gemeinsame Geschichte überführt
+C) Weil Leo dann verschwindet
+D) Weil Dilatation verboten wird
+ANSWER: B
+
+Welche Paarung ist korrekt?
+A) Leo — Reisende mit höchstem β
+B) Elonore — typisch höherer β als Leoni in der Default-Steuerung
+C) Leoni — bleibt am SpacePort
+D) Alle drei — identische γ immer
+ANSWER: B
+
+Einsicht (intellectus) beim Vergleich der drei Katzen bedeutet:
+A) Die Zahlen nicht ansehen
+B) Die Unterschiede der Eigenzeiten klar erkennen und deuten
+C) Nur Leo loben
+D) Cycles ignorieren
+ANSWER: B
+
+Rat (consilium) als LOGOS-Kraft wird gefördert, wenn:
+A) Man nie Cycles plant
+B) Man aus mehreren Cycles lernt, wann Dilatation/Routen sinnvoll sind
+C) Man den SpacePort abschafft
+D) Man Fragen im Aiken-Format verbietet
+ANSWER: B
+
+Welche Aussage ist theologisch-pädagogisch im Sinne von Magnifica Humanitas angemessen?
+A) Technik ersetzt Erlösung und Seelenkräfte.
+B) Raumfahrt-Metaphern können Sehnsucht spiegeln; LOGOS-Kräfte und Würde bleiben zentral, Technik ist nicht Gott.
+C) Nur Dilatation rettet die Seele.
+D) Schrödinger beweist den Atheismus.
+ANSWER: B
+
+Was passiert, wenn Dilatation AUS und Schrödinger AUS ist?
+A) Es gibt keine Uhren mehr.
+B) Alle Katzen ticken im Wesentlichen synchron (lineare Zeit / „Sober“).
+C) Nur Elonore läuft rückwärts.
+D) SOL-7 ist unmöglich.
+ANSWER: B
+
+Welches Ziel hat der Button „In Mars Mission übernehmen“ / Apply?
+A) Moodle zu löschen
+B) Jungbrunnen-Bonus an Crystal Prism Praxis (localStorage/postMessage) zu übergeben
+C) Den SpacePort zu schließen
+D) Nur Screenshots zu machen
+ANSWER: B
+
+SOL-7 bezieht sich im Szenario vor allem auf:
+A) Sieben Bitcoin-Wallets
+B) Den siebten Multi-Cycle / das Treffen der drei Katzen und die sieben LOGOS-Gaben als Deutungshorizont
+C) Sieben gleiche Uhren ohne Unterschied
+D) Nur ein Quiz ohne Simulation
+ANSWER: B
+
+Was ist ein sinnvolles Lernziel der beweglichen Katzenuhr mit Zeigern?
+A) Auswendiglernen von HTML-Tags
+B) Intuitive Kopplung von Realzeit, Simulationszeit und Eigenzeit der Figuren
+C) Ersatz für den Religionsunterricht ohne Fragen
+D) Nur Unterhaltung ohne Reflexion
+ANSWER: B
+
+Welche Reihenfolge beschreibt den empfohlenen Ablauf?
+A) Treffen → Reset → nie beobachten
+B) Laufen → Cycles → Beobachten → SOL-7 Treffen → LOGOS-Reflexion
+C) Nur Schrödinger ohne Zeit
+D) Nur Blog lesen ohne Simulation
+ANSWER: B
+
+Wenn Leo 10 sim-Jahre, Elonore 4 und Leoni 6 aufweist (Dilatation an), was ist korrekt?
+A) Leo ist die jüngste Katze.
+B) Elonore hat die kürzeste Eigenzeit der drei; Leo die längste.
+C) Alle sind gleich alt.
+D) Leoni ist älter als Leo.
+ANSWER: B
+
+Welche Gefahr besteht, wenn man Dilatation moralisch missversteht?
+A) Man könnte Reisende für „besser“ und Bleibende für „schlechter“ halten — statt Physik und Berufung zu unterscheiden.
+B) Man versteht DEGERFELD besser.
+C) Man aktiviert zu viele LOGOS-Kräfte.
+D) Es gibt keine Gefahr.
+ANSWER: A
+
+Erkenntnis (scientia) im SOL-Kontext meint:
+A) Nur Auswendiglernen von γ-Formeln ohne Sinn
+B) Wissen um Zusammenhänge: β, γ, Eigenzeit, Ground Truth und ethische Deutung
+C) Ablehnung jeder Messung
+D) Nur Schrödinger ohne Dilatation
+ANSWER: B
+
+Was bleibt trotz aller Simulationen die „Ground Truth“ der Geschichte?
+A) Die Fantasie der Reisenden allein
+B) Die gemeinsame Realität der Begegnung und — im Bild — DEGERFELD-Zeit als Referenz, plus die ethische Deutung im LOGOS
+C) Der höchste Warp-Faktor
+D) Die Anzahl der Emojis
+ANSWER: B
+
+Welche Aussage zu Moodle/Aiken ist richtig?
+A) Aiken-Fragen haben Optionen A–D und eine Zeile ANSWER: X
+B) Aiken braucht immer Bilder
+C) ANSWER steht vor den Optionen
+D) Es gibt keine richtigen Antworten
+ANSWER: A
