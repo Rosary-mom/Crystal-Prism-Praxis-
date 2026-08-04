@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOL · Ewige CatClock — Schrödinger · Multi-Cycle · SOL-7 | Crystal Prism</title>
+  <meta name="description" content="SOL: bewegliche Katzenuhr mit Zeigern. Schrödinger + Multi-Cycle. SOL-7: Leo, Elonore, Leoni. DEGERFELD SpacePort.">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cyan: #00ffff; --gold: #c9a86c; --bg: #050a12;
+      --panel: rgba(0, 20, 40, 0.94); --pink: #ff66cc; --leo: #f5d76e;
+      --elo: #7ec8ff; --leo2: #c49bff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh;
+      font-family: "Roboto Mono", monospace;
+      background: radial-gradient(ellipse at 25% 15%, #0a2840, var(--bg) 55%);
+      color: var(--cyan); padding: 1rem 1.25rem 2rem;
+    }
+    h1, h2, h3 { font-family: Orbitron, sans-serif; letter-spacing: 0.05em; }
+    a { color: var(--gold); }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    .panel {
+      background: var(--panel); border: 1px solid rgba(0,255,255,0.35);
+      border-radius: 12px; padding: 1.1rem 1.25rem; margin-bottom: 0.9rem;
+      box-shadow: 0 0 22px rgba(0,255,255,0.1);
+    }
+    .pill {
+      display: inline-block; padding: 0.15rem 0.55rem; border-radius: 999px;
+      border: 1px solid var(--gold); color: var(--gold); font-size: 0.68rem;
+      letter-spacing: 0.1em; margin-bottom: 0.5rem;
+    }
+    .grid { display: grid; gap: 0.85rem; }
+    @media (min-width: 720px) {
+      .grid.two { grid-template-columns: 1fr 1fr; }
+      .grid.three { grid-template-columns: 1fr 1fr 1fr; }
+      .grid.clocks { grid-template-columns: 200px 1fr; align-items: center; }
+    }
+    .muted { opacity: 0.72; font-size: 0.82rem; line-height: 1.45; }
+    .stat { font-size: 0.88rem; margin: 0.3rem 0; }
+    .btn {
+      display: inline-block; padding: 0.55rem 0.95rem; margin: 0.2rem 0.3rem 0.2rem 0;
+      border: 1px solid var(--cyan); background: rgba(0,80,90,0.5); color: #fff;
+      border-radius: 6px; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.82rem;
+    }
+    .btn:hover { background: rgba(0,120,130,0.65); }
+    .btn.gold { border-color: var(--gold); color: var(--gold); }
+    .btn.pink { border-color: var(--pink); color: var(--pink); }
+    input[type=range] { width: 100%; accent-color: var(--cyan); }
+    label.chk { display: flex; align-items: center; gap: 0.45rem; cursor: pointer; }
+
+    /* Analog clock with hands */
+    .analog {
+      width: 180px; height: 180px; margin: 0 auto; position: relative;
+      border-radius: 50%; border: 3px solid var(--cyan);
+      background: radial-gradient(circle at 40% 35%, #0a3040, #000812 70%);
+      box-shadow: 0 0 20px rgba(0,255,255,0.25), inset 0 0 30px rgba(0,0,0,0.6);
+    }
+    .analog .mark {
+      position: absolute; width: 2px; height: 8px; background: rgba(0,255,255,0.5);
+      left: 50%; top: 6px; transform-origin: 50% 84px; margin-left: -1px;
+    }
+    .hand {
+      position: absolute; left: 50%; bottom: 50%; transform-origin: 50% 100%;
+      border-radius: 2px; margin-left: -1.5px;
+    }
+    .hand.hour { width: 3px; height: 48px; background: var(--gold); z-index: 3; }
+    .hand.minute { width: 2px; height: 62px; background: var(--cyan); z-index: 4; }
+    .hand.second { width: 1px; height: 70px; background: var(--pink); z-index: 5; }
+    .hand.cat {
+      width: 0; height: 0; margin-left: 0;
+      border-left: 6px solid transparent; border-right: 6px solid transparent;
+      border-bottom: 58px solid var(--leo); opacity: 0.9; z-index: 6;
+    }
+    .center-dot {
+      position: absolute; width: 10px; height: 10px; background: #fff;
+      border-radius: 50%; left: 50%; top: 50%; margin: -5px 0 0 -5px; z-index: 10;
+    }
+    .digital {
+      font-size: 1.35rem; font-weight: 700; text-align: center;
+      font-variant-numeric: tabular-nums; margin-top: 0.5rem;
+    }
+
+    /* Cat cards */
+    .cat-card {
+      border-radius: 10px; padding: 0.85rem; border: 1px solid rgba(0,255,255,0.3);
+      background: #001018; text-align: center; position: relative; overflow: hidden;
+    }
+    .cat-card.leo { border-color: var(--leo); }
+    .cat-card.elo { border-color: var(--elo); }
+    .cat-card.leo2 { border-color: var(--leo2); }
+    .cat-emoji {
+      font-size: 2.4rem; display: inline-block; transition: transform 0.08s linear;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.25));
+    }
+    .cat-card.superposed .cat-emoji {
+      animation: schrodinger 1.1s ease-in-out infinite;
+      opacity: 0.55;
+    }
+    @keyframes schrodinger {
+      0%, 100% { transform: scale(1) rotate(-8deg); filter: blur(0); }
+      50% { transform: scale(1.15) rotate(8deg); filter: blur(1.5px); opacity: 0.35; }
+    }
+    .age { font-size: 1.5rem; font-weight: 700; margin: 0.35rem 0; }
+    .tag { font-size: 0.65rem; letter-spacing: 0.08em; opacity: 0.75; text-transform: uppercase; }
+
+    .logos-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.4rem;
+    }
+    .logos-pill {
+      font-size: 0.68rem; padding: 0.35rem 0.45rem; border-radius: 6px;
+      border: 1px solid rgba(201,168,108,0.4); text-align: center; opacity: 0.4;
+      transition: opacity 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .logos-pill.on {
+      opacity: 1; border-color: var(--gold);
+      box-shadow: 0 0 10px rgba(201,168,108,0.35); color: var(--gold);
+    }
+    .insight {
+      border-left: 3px solid var(--gold); padding: 0.6rem 0.85rem;
+      background: rgba(201,168,108,0.08); margin-top: 0.75rem; font-size: 0.85rem; line-height: 1.5;
+    }
+    .cycle-bar {
+      height: 8px; background: #001820; border-radius: 4px; overflow: hidden; margin: 0.4rem 0;
+    }
+    .cycle-fill { height: 100%; background: linear-gradient(90deg, var(--cyan), var(--gold)); width: 0%; transition: width 0.2s; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel">
+      <span class="pill">SOL ELEMENTS · SCHRÖDINGER · MULTI-CYCLE · SOL-7</span>
+      <h1 style="margin:0 0 0.35rem;font-size:1.25rem;color:#fff;">Ewige CatClock · bewegliche Katzenuhr</h1>
+      <p class="muted" style="margin:0;">
+        Zeiger laufen für alle SOL-Uhren. Multi-Cycle-Reisen · Schrödinger-Superposition bis Beobachtung ·
+        <strong>SOL-7 Treffen:</strong> Kater Leo (Degerfeld SpacePort), Elonore &amp; Leoni (Reisende).
+        Quelle: <a href="https://rosary.health/der-koenig-der-raumfahrt/" target="_blank" rel="noopener">König der Raumfahrt</a> ·
+        <a href="../index.html">Crystal Prism</a>
+      </p>
+    </div>
+
+    <!-- Master analog clock -->
+    <div class="panel">
+      <div class="grid clocks">
+        <div>
+          <div class="tag" style="text-align:center;margin-bottom:0.4rem;">SOL Master-Zeiger · DEGERFELD + Sim</div>
+          <div class="analog" id="analog-master">
+            <div class="center-dot"></div>
+            <div class="hand hour" id="hand-h"></div>
+            <div class="hand minute" id="hand-m"></div>
+            <div class="hand second" id="hand-s"></div>
+            <div class="hand cat" id="hand-cat" title="Katzenzeiger"></div>
+          </div>
+          <div class="digital" id="degerfeld-digital">--:--:--</div>
+          <div class="muted" style="text-align:center;" id="degerfeld-date"></div>
+        </div>
+        <div>
+          <h2 style="font-size:0.95rem;color:var(--gold);margin:0 0 0.6rem;">Steuerung</h2>
+          <label class="chk stat"><input type="checkbox" id="dilation-toggle" checked> Zeitdilatation (Lorentz / Jungbrunnen)</label>
+          <label class="chk stat"><input type="checkbox" id="schrodinger-toggle"> Schrödinger-Modus (Superposition bis Beobachten)</label>
+          <div class="stat">v/c Elonore = <span id="beta1-lab">0.80</span>
+            <input type="range" id="beta1" min="0" max="99" value="80">
+          </div>
+          <div class="stat">v/c Leoni = <span id="beta2-lab">0.60</span>
+            <input type="range" id="beta2" min="0" max="99" value="60">
+          </div>
+          <div class="stat">γ₁ = <span id="g1">1.67</span> · γ₂ = <span id="g2">1.25</span></div>
+          <div class="stat">Multi-Cycle: <strong id="cycle-n">0</strong> / <span id="cycle-max">7</span>
+            <div class="cycle-bar"><div class="cycle-fill" id="cycle-fill"></div></div>
+          </div>
+          <div>
+            <button type="button" class="btn" id="btn-start">▶ Laufen</button>
+            <button type="button" class="btn" id="btn-pause">⏸ Pause</button>
+            <button type="button" class="btn" id="btn-reset">↺ Reset</button>
+            <button type="button" class="btn gold" id="btn-cycle">＋ Cycle abschließen</button>
+            <button type="button" class="btn pink" id="btn-observe">👁 Beobachten (Welle)</button>
+            <button type="button" class="btn gold" id="btn-meet">SOL-7 Treffen</button>
+            <button type="button" class="btn" id="btn-apply">→ Mars Mission</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Three cats SOL-7 -->
+    <div class="panel">
+      <h2 style="font-size:1rem;color:var(--gold);margin:0 0 0.75rem;">SOL-7 · Kater Leo · Elonore · Leoni</h2>
+      <div class="grid three" id="cats-row">
+        <div class="cat-card leo" id="card-leo">
+          <div class="tag">Degerfeld SpacePort · blieb</div>
+          <div class="cat-emoji" id="emoji-leo">🦁</div>
+          <h3 style="margin:0.3rem 0;font-size:0.95rem;color:var(--leo);">Kater Leo</h3>
+          <div class="age" id="age-leo">0.00 a</div>
+          <div class="muted" id="role-leo">Eigenzeit = Erdzeit (Ground Truth)</div>
+          <div class="digital" style="font-size:0.95rem;" id="clk-leo">00:00:00</div>
+        </div>
+        <div class="cat-card elo" id="card-elo">
+          <div class="tag">Reisende · hoher β</div>
+          <div class="cat-emoji" id="emoji-elo">🐈‍⬛</div>
+          <h3 style="margin:0.3rem 0;font-size:0.95rem;color:var(--elo);">Elonore</h3>
+          <div class="age" id="age-elo">0.00 a</div>
+          <div class="muted" id="role-elo">DWARF/WARP-Route</div>
+          <div class="digital" style="font-size:0.95rem;" id="clk-elo">00:00:00</div>
+        </div>
+        <div class="cat-card leo2" id="card-leo2">
+          <div class="tag">Reisende · mittlerer β</div>
+          <div class="cat-emoji" id="emoji-leo2">🐱</div>
+          <h3 style="margin:0.3rem 0;font-size:0.95rem;color:var(--leo2);">Leoni</h3>
+          <div class="age" id="age-leo2">0.00 a</div>
+          <div class="muted" id="role-leo2">Prism-Corridor-Route</div>
+          <div class="digital" style="font-size:0.95rem;" id="clk-leo2">00:00:00</div>
+        </div>
+      </div>
+      <div class="insight" id="compare-box">
+        Starte die Uhr, schließe Cycles ab, dann <strong>SOL-7 Treffen</strong>.
+        Vergleiche Alter nach Schrödinger-Beobachtung und Dilatation.
+      </div>
+    </div>
+
+    <!-- LOGOS soul forces -->
+    <div class="panel">
+      <h2 style="font-size:1rem;color:var(--gold);margin:0 0 0.5rem;">LOGOS · Seelen-Kräfte (7 Gaben)</h2>
+      <p class="muted" style="margin:0 0 0.6rem;">Aktivierung abhängig von Dilatation, Cycles und Beobachtung (SOL-7).</p>
+      <div class="logos-grid" id="logos-grid">
+        <div class="logos-pill" data-key="weisheit">Weisheit</div>
+        <div class="logos-pill" data-key="einsicht">Einsicht</div>
+        <div class="logos-pill" data-key="rat">Rat</div>
+        <div class="logos-pill" data-key="staerke">Stärke</div>
+        <div class="logos-pill" data-key="erkenntnis">Erkenntnis</div>
+        <div class="logos-pill" data-key="frommigkeit">Frömmigkeit</div>
+        <div class="logos-pill" data-key="furcht">Gottesfurcht</div>
+      </div>
+      <div class="insight" id="logos-insight">Noch keine LOGOS-Kräfte hervorgehoben — simuliere und beobachte.</div>
+    </div>
+
+    <div class="panel">
+      <div class="stat">Jungbrunnen gesamt (Leo − jüngste Reisende): <strong id="jb-total">0.00</strong> a</div>
+      <div class="stat">Cycles kumuliert Eigenzeit-Ersparnis: <strong id="jb-cycles">0.00</strong> a</div>
+      <div class="stat">Missions-Bonus: <strong id="bonus-hint">+0</strong></div>
+      <p class="muted">Bildungs-/Magnifica-Synthese — keine medizinische Beratung. Moodle-Aiken: <code>sol-7-moodle-aiken.txt</code></p>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    const $ = (id) => document.getElementById(id);
+    const CYCLE_MAX = 7;
+    const SPEED = 3600 * 24 * 45; // sim speed
+
+    let running = false, lastTs = null;
+    let tLeo = 0, tElo = 0, tLeo2 = 0; // seconds
+    let cycle = 0;
+    let cumJb = 0;
+    let observed = true; // false when schrodinger running without observe
+    let meetDone = false;
+
+    // marks on analog
+    const analog = $("analog-master");
+    for (let i = 0; i < 12; i++) {
+      const m = document.createElement("div");
+      m.className = "mark";
+      m.style.transform = "rotate(" + (i * 30) + "deg)";
+      analog.appendChild(m);
+    }
+
+    function gamma(beta) {
+      if (beta >= 0.999) return 1000;
+      return 1 / Math.sqrt(1 - beta * beta);
+    }
+    function years(s) { return s / (3600 * 24 * 365.25); }
+    function fmt(s) {
+      s = Math.max(0, s);
+      const h = Math.floor(s / 3600) % 100;
+      const m = Math.floor((s % 3600) / 60);
+      const sec = Math.floor(s % 60);
+      return [h, m, sec].map(x => String(x).padStart(2, "0")).join(":");
+    }
+    function beta1() { return Number($("beta1").value) / 100; }
+    function beta2() { return Number($("beta2").value) / 100; }
+
+    function setHands(earthSeconds) {
+      // map sim time + wall clock blend for visual motion
+      const now = new Date();
+      const wallSec = now.getSeconds() + now.getMilliseconds() / 1000;
+      const wallMin = now.getMinutes() + wallSec / 60;
+      const wallHour = (now.getHours() % 12) + wallMin / 60;
+      // cat hand follows simulated Leo years fraction of a "life dial"
+      const life = (years(earthSeconds) % 12) / 12;
+      $("hand-s").style.transform = "rotate(" + (wallSec * 6) + "deg)";
+      $("hand-m").style.transform = "rotate(" + (wallMin * 6) + "deg)";
+      $("hand-h").style.transform = "rotate(" + (wallHour * 30) + "deg)";
+      $("hand-cat").style.transform = "rotate(" + (life * 360) + "deg)";
+    }
+
+    function updateDegerfeld() {
+      const now = new Date();
+      $("degerfeld-digital").textContent = new Intl.DateTimeFormat("de-DE", {
+        timeZone: "Europe/Berlin", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
+      }).format(now) + " CET/CEST";
+      $("degerfeld-date").textContent = new Intl.DateTimeFormat("de-DE", {
+        timeZone: "Europe/Berlin", weekday: "short", day: "numeric", month: "short", year: "numeric"
+      }).format(now) + " · DEGERFELD SPACEPORT";
+    }
+
+    function refreshPhysicsLabels() {
+      const b1 = beta1(), b2 = beta2();
+      $("beta1-lab").textContent = b1.toFixed(2);
+      $("beta2-lab").textContent = b2.toFixed(2);
+      $("g1").textContent = gamma(b1).toFixed(2);
+      $("g2").textContent = gamma(b2).toFixed(2);
+    }
+
+    function schrodingerActive() {
+      return $("schrodinger-toggle").checked && !observed;
+    }
+
+    function updateCatsUI(ts) {
+      const sch = schrodingerActive();
+      ["card-elo", "card-leo2"].forEach(id => {
+        $(id).classList.toggle("superposed", sch);
+      });
+      $("card-leo").classList.remove("superposed");
+
+      $("age-leo").textContent = years(tLeo).toFixed(2) + " a";
+      $("age-elo").textContent = sch ? "??? a" : years(tElo).toFixed(2) + " a";
+      $("age-leo2").textContent = sch ? "??? a" : years(tLeo2).toFixed(2) + " a";
+      $("clk-leo").textContent = fmt(tLeo);
+      $("clk-elo").textContent = sch ? "??:??:??" : fmt(tElo);
+      $("clk-leo2").textContent = sch ? "??:??:??" : fmt(tLeo2);
+
+      const wob = Math.sin((ts || 0) / 200);
+      $("emoji-leo").style.transform = "rotate(" + (wob * 8) + "deg)";
+      if (!sch) {
+        const g1 = $("dilation-toggle").checked ? gamma(beta1()) : 1;
+        const g2 = $("dilation-toggle").checked ? gamma(beta2()) : 1;
+        $("emoji-elo").style.transform = "rotate(" + (wob * 8 / g1) + "deg) scale(" + Math.max(0.8, 1/Math.sqrt(g1)) + ")";
+        $("emoji-leo2").style.transform = "rotate(" + (wob * 8 / g2) + "deg) scale(" + Math.max(0.8, 1/Math.sqrt(g2)) + ")";
+      }
+
+      const youngest = Math.min(years(tElo), years(tLeo2));
+      const jb = Math.max(0, years(tLeo) - youngest);
+      $("jb-total").textContent = jb.toFixed(2);
+      $("jb-cycles").textContent = cumJb.toFixed(2);
+      const bonus = Math.min(18, Math.floor((jb + cumJb) * 1.5));
+      $("bonus-hint").textContent = "+" + bonus;
+
+      $("cycle-n").textContent = String(cycle);
+      $("cycle-fill").style.width = ((cycle / CYCLE_MAX) * 100) + "%";
+    }
+
+    function activateLogos(keys, text) {
+      document.querySelectorAll(".logos-pill").forEach(el => {
+        el.classList.toggle("on", keys.indexOf(el.getAttribute("data-key")) >= 0);
+      });
+      $("logos-insight").textContent = text;
+    }
+
+    function computeLogos() {
+      const dil = $("dilation-toggle").checked;
+      const sch = $("schrodinger-toggle").checked;
+      const keys = [];
+      if (dil) keys.push("weisheit", "erkenntnis"); // time discernment
+      if (cycle >= 1) keys.push("staerke");
+      if (cycle >= 3) keys.push("rat");
+      if (cycle >= CYCLE_MAX || meetDone) keys.push("einsicht", "frommigkeit");
+      if (observed && sch) keys.push("furcht"); // awe at collapse / mystery
+      if (meetDone) keys.push("weisheit", "einsicht", "erkenntnis");
+      if (!keys.length) {
+        activateLogos([], "Noch keine LOGOS-Kräfte hervorgehoben — simuliere und beobachte.");
+        return;
+      }
+      const names = {
+        weisheit: "Weisheit", einsicht: "Einsicht", rat: "Rat", staerke: "Stärke",
+        erkenntnis: "Erkenntnis", frommigkeit: "Frömmigkeit", furcht: "Gottesfurcht"
+      };
+      const list = keys.filter((v, i, a) => a.indexOf(v) === i).map(k => names[k]).join(", ");
+      let msg = "Aktive LOGOS-Seelenkräfte: " + list + ". ";
+      if (meetDone) {
+        msg += "Beim SOL-7-Treffen wird offenbar: Leo trägt die volle Erdzeit (Treue zum Ground Truth); "
+          + "Elonore & Leoni sind biologisch jünger — nicht weil sie „besser“ sind, sondern weil Eigenzeit formbar ist. "
+          + "Schrödinger erinnert: ohne Beobachtung (Urteil) bleibt das Leben in Spannung (schon/noch nicht). "
+          + "Auffällig: wer bleibt, wird älter an Jahren; wer reist, spart Eigenzeit — beide brauchen Weisheit und Gottesfurcht.";
+      }
+      activateLogos(keys, msg);
+    }
+
+    function tick(ts) {
+      if (!running) return;
+      if (lastTs == null) lastTs = ts;
+      const dt = (ts - lastTs) / 1000;
+      lastTs = ts;
+
+      const dil = $("dilation-toggle").checked;
+      const g1 = dil ? gamma(beta1()) : 1;
+      const g2 = dil ? gamma(beta2()) : 1;
+
+      tLeo += dt * SPEED;
+      tElo += dt * SPEED / g1;
+      tLeo2 += dt * SPEED / g2;
+
+      if ($("schrodinger-toggle").checked && observed === true && running) {
+        // start superposed until user observes after enabling
+      }
+
+      setHands(tLeo);
+      updateDegerfeld();
+      updateCatsUI(ts);
+      computeLogos();
+      requestAnimationFrame(tick);
+    }
+
+    $("btn-start").onclick = () => {
+      running = true; lastTs = null;
+      if ($("schrodinger-toggle").checked) observed = false;
+      requestAnimationFrame(tick);
+    };
+    $("btn-pause").onclick = () => { running = false; lastTs = null; };
+    $("btn-reset").onclick = () => {
+      running = false; lastTs = null;
+      tLeo = tElo = tLeo2 = 0; cycle = 0; cumJb = 0; meetDone = false; observed = true;
+      updateCatsUI(0); setHands(0); computeLogos();
+      $("compare-box").innerHTML = "Reset. Starte neu für SOL-7.";
+    };
+
+    $("btn-cycle").onclick = () => {
+      if (cycle >= CYCLE_MAX) {
+        $("compare-box").textContent = "SOL-7: Maximum 7 Cycles erreicht. Jetzt Treffen auslösen.";
+        return;
+      }
+      // close one mission cycle: accumulate jungbrunnen for travelers
+      const jb1 = Math.max(0, years(tLeo) - years(tElo));
+      const jb2 = Math.max(0, years(tLeo) - years(tLeo2));
+      cumJb += (jb1 + jb2) / 2;
+      cycle += 1;
+      // soft reset ship times relative? keep absolute ages — multi-cycle means more travel time already in tElo
+      $("compare-box").innerHTML = "Cycle <strong>" + cycle + "</strong>/" + CYCLE_MAX
+        + " abgeschlossen. Kumulierte Ersparnis ≈ " + cumJb.toFixed(2) + " a. "
+        + (cycle >= CYCLE_MAX ? "Bereit für <strong>SOL-7 Treffen</strong>." : "Weitere Cycle möglich.");
+      if ($("schrodinger-toggle").checked) observed = false;
+      updateCatsUI(performance.now());
+      computeLogos();
+    };
+
+    $("btn-observe").onclick = () => {
+      observed = true;
+      updateCatsUI(performance.now());
+      computeLogos();
+      $("compare-box").innerHTML = "<strong>Beobachtung:</strong> Wellenfunktion kollabiert — Alter von Elonore &amp; Leoni sind festgelegt. "
+        + "Leo: " + years(tLeo).toFixed(2) + " a · Elonore: " + years(tElo).toFixed(2) + " a · Leoni: " + years(tLeo2).toFixed(2) + " a. "
+        + "Was auffällt: der am SpacePort Gebliebene ist (bei Dilatation) der älteste an Eigenzeit der Reisenden gemessen — er hat mehr „Erdjahre“ auf dem Buckel.";
+    };
+
+    $("btn-meet").onclick = () => {
+      observed = true;
+      meetDone = true;
+      updateCatsUI(performance.now());
+      const ages = [
+        { n: "Leo", a: years(tLeo), r: "blieb am Degerfeld SpacePort" },
+        { n: "Elonore", a: years(tElo), r: "hohe Geschwindigkeit" },
+        { n: "Leoni", a: years(tLeo2), r: "mittlere Geschwindigkeit" }
+      ].sort((x, y) => y.a - x.a);
+      const youngest = ages[ages.length - 1];
+      const oldest = ages[0];
+      let html = "<strong>SOL-7 Treffen:</strong> Leo, Elonore und Leoni sehen sich wieder.<br>";
+      html += "Älteste Eigenzeit: <strong>" + oldest.n + "</strong> (" + oldest.a.toFixed(2) + " a) — " + oldest.r + ".<br>";
+      html += "Jüngste Eigenzeit: <strong>" + youngest.n + "</strong> (" + youngest.a.toFixed(2) + " a).<br>";
+      html += "<br><strong>Was fällt auf?</strong> ";
+      if ($("dilation-toggle").checked && years(tLeo) > years(tElo) + 0.01) {
+        html += "Leo ist biologisch älter als die Reisenden — nicht als moralisches Urteil, sondern als Physik der Eigenzeit. "
+          + "Die am Boden gebliebene Katze „zahlt“ die volle DEGERFELD-Zeit. "
+          + "Elonore (höherer β) ist jünger als Leoni, wenn γ₁ &gt; γ₂.<br>";
+      } else {
+        html += "Ohne Dilatation altern alle gleich — der Unterschied ist dann nur Erzählung/Rolle, nicht die Uhr.<br>";
+      }
+      html += "<strong>Schrödinger:</strong> Vor der Beobachtung waren die Reisenden in unscharfem Zustand; erst das Treffen (Messung/Begegnung) macht Geschichte gemeinsam.<br>";
+      html += "<strong>LOGOS:</strong> Weisheit (Zeit deuten), Einsicht (Unterschiede sehen), Stärke (reisen), Gottesfurcht (Geheimnis der Zeit), Frömmigkeit (Treue Leos zum Ort).";
+      $("compare-box").innerHTML = html;
+      computeLogos();
+    };
+
+    $("btn-apply").onclick = () => {
+      const youngest = Math.min(years(tElo), years(tLeo2));
+      const jb = Math.max(0, years(tLeo) - youngest) + cumJb;
+      const payload = {
+        type: "SOL_CATCLOCK_APPLY",
+        jungbrunnenYears: jb,
+        legitimacyBonus: Math.min(18, Math.floor(jb * 1.5)),
+        settlementBonus: Math.min(12, Math.floor(jb)),
+        cycle: cycle,
+        meetDone: meetDone,
+        cats: {
+          leo: years(tLeo),
+          elonore: years(tElo),
+          leoni: years(tLeo2)
+        },
+        ts: Date.now()
+      };
+      try { localStorage.setItem("solCatClock", JSON.stringify(payload)); } catch (e) {}
+      if (window.opener && !window.opener.closed) {
+        try { window.opener.postMessage(payload, "*"); } catch (e) {}
+      }
+      alert("SOL an Mars Mission: Jungbrunnen " + jb.toFixed(2) + " a · Cycles " + cycle);
+    };
+
+    $("beta1").oninput = $("beta2").oninput = refreshPhysicsLabels;
+    $("schrodinger-toggle").onchange = () => {
+      observed = !$("schrodinger-toggle").checked;
+      updateCatsUI(performance.now());
+    };
+    $("dilation-toggle").onchange = () => updateCatsUI(performance.now());
+
+    // wall-clock hands always move
+    setInterval(() => {
+      if (!running) {
+        updateDegerfeld();
+        setHands(tLeo);
+      }
+    }, 100);
+
+    refreshPhysicsLabels();
+    updateDegerfeld();
+    updateCatsUI(0);
+    setHands(0);
+    computeLogos();
+  })();
+  </script>
+</body>
+</html>

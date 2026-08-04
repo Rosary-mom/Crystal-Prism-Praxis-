@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAT-U-MEN — Drei Katzen in Bitz und der neue Gottesbeweis | Paladine · rosary.health</title>
+  <meta name="description" content="Cat-U-Men: Leo, Elonore, Leoni in Bitz. Keine Raketen-Theologie. Himmlisches Jerusalem, Hochzeitsmahl des Lammes, Christus der König. Apologetischer Gottesbeweis mit LOGOS-Seelenkraft.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rosario:ital,wght@0,400;0,600;0,700;1,400&family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0a0a0c;
+      --paper: #f4efe4;
+      --cream: #fffaf0;
+      --gold: #c4a35a;
+      --gold-bright: #e8c878;
+      --crimson: #8b1e2d;
+      --navy: #0c1424;
+      --teal: #1a4a4a;
+      --line: #2a2418;
+      --muted: #4a453c;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: "Rosario", "Segoe UI", system-ui, sans-serif;
+      font-size: 1.08rem;
+      line-height: 1.7;
+    }
+    /* Rockwell stack — Extra Bold via Arvo 700 where Rockwell missing */
+    .rock, h1, h2, h3, .kicker, .agent-label, .score-num, .thesis-tag {
+      font-family: Rockwell, "Rockwell Extra Bold", "Arvo", "Times New Roman", serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+    .mast {
+      border: 3px solid var(--gold);
+      background: linear-gradient(165deg, #121820 0%, #0a0e14 100%);
+      padding: 2rem 1.5rem 1.75rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 0 1px #000, 0 12px 40px rgba(0,0,0,0.55);
+    }
+    .kicker {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: var(--gold-bright);
+      margin-bottom: 0.85rem;
+    }
+    h1 {
+      margin: 0 0 0.75rem;
+      font-size: clamp(1.85rem, 5vw, 2.55rem);
+      line-height: 1.15;
+      color: var(--cream);
+      text-transform: uppercase;
+    }
+    h1 span.accent { color: var(--gold-bright); }
+    .sub {
+      font-family: Rosario, sans-serif;
+      font-size: 1.05rem;
+      color: #c8c2b4;
+      max-width: 34em;
+      margin: 0 auto;
+      font-weight: 400;
+    }
+    .meta {
+      margin-top: 1.25rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    article h2 {
+      font-size: 1.35rem;
+      color: var(--gold-bright);
+      border-bottom: 2px solid var(--crimson);
+      padding-bottom: 0.4rem;
+      margin: 2.4rem 0 1rem;
+      text-transform: uppercase;
+    }
+    article h3 {
+      font-size: 1.1rem;
+      color: var(--cream);
+      margin: 1.6rem 0 0.55rem;
+    }
+    p { margin: 0 0 1rem; color: #e8e2d6; }
+    strong { color: var(--cream); }
+    em { color: var(--gold-bright); font-style: italic; }
+    a { color: var(--gold-bright); }
+    a:hover { color: #fff; }
+    .lead {
+      font-size: 1.2rem;
+      border-left: 4px solid var(--gold);
+      padding: 0.35rem 0 0.35rem 1.1rem;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+    .panel {
+      background: var(--navy);
+      border: 2px solid var(--gold);
+      padding: 1.25rem 1.35rem;
+      margin: 1.5rem 0;
+    }
+    .panel.dark {
+      background: #05070c;
+      border-color: var(--crimson);
+    }
+    .panel.light {
+      background: var(--paper);
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+    .panel.light p, .panel.light li { color: var(--ink); }
+    .panel.light h3 { color: var(--crimson); }
+    .panel.light strong { color: var(--ink); }
+    .agent-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--gold);
+      padding: 0.25rem 0.55rem;
+      margin-bottom: 0.65rem;
+    }
+    .panel.dark .agent-label {
+      background: var(--crimson);
+      color: var(--cream);
+    }
+    ul.tight { margin: 0.4rem 0 1rem; padding-left: 1.2rem; }
+    ul.tight li { margin-bottom: 0.35rem; color: #ddd6c8; }
+    .cats {
+      display: grid;
+      gap: 0.75rem;
+      margin: 1.25rem 0;
+    }
+    @media (min-width: 620px) {
+      .cats { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    .cat {
+      border: 2px solid var(--gold);
+      background: #0e1520;
+      padding: 1rem 0.85rem;
+      text-align: center;
+    }
+    .cat .emoji { font-size: 2.2rem; line-height: 1; }
+    .cat .name {
+      font-family: Rockwell, Arvo, serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--gold-bright);
+      margin: 0.4rem 0 0.25rem;
+      text-transform: uppercase;
+    }
+    .cat .role { font-size: 0.78rem; color: #a8a090; }
+    .scoreboard {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.65rem;
+      margin: 1rem 0;
+    }
+    @media (min-width: 520px) {
+      .scoreboard { grid-template-columns: repeat(4, 1fr); }
+    }
+    .score {
+      border: 2px solid var(--gold);
+      background: #000;
+      text-align: center;
+      padding: 0.75rem 0.4rem;
+    }
+    .score-num {
+      font-size: 1.65rem;
+      color: var(--gold-bright);
+      line-height: 1.1;
+    }
+    .score-lab {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-top: 0.25rem;
+    }
+    .thesis {
+      margin: 1rem 0;
+      padding: 1rem 1.1rem;
+      border: 2px solid;
+    }
+    .thesis.t { border-color: var(--gold); background: rgba(196,163,90,0.08); }
+    .thesis.a { border-color: var(--crimson); background: rgba(139,30,45,0.12); }
+    .thesis.s { border-color: var(--cream); background: rgba(255,250,240,0.06); }
+    .thesis-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+      color: var(--gold-bright);
+    }
+    .thesis.a .thesis-tag { color: #e88; }
+    blockquote {
+      margin: 1.5rem 0;
+      padding: 1rem 1.25rem;
+      border-left: 5px solid var(--gold);
+      background: #0a1018;
+      font-size: 1.05rem;
+      color: var(--cream);
+    }
+    blockquote cite {
+      display: block;
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-style: normal;
+      font-family: Rockwell, Arvo, serif;
+      letter-spacing: 0.06em;
+    }
+    .irony {
+      border: 2px dashed var(--gold);
+      padding: 1rem 1.15rem;
+      margin: 1.5rem 0;
+      background: #111;
+    }
+    .serious {
+      border: 3px solid var(--cream);
+      padding: 1.15rem 1.25rem;
+      margin: 1.5rem 0;
+      background: #000;
+    }
+    .cta {
+      margin-top: 2.5rem;
+      padding: 1.75rem 1.35rem;
+      text-align: center;
+      background: linear-gradient(180deg, #1a1208, #0a0806);
+      border: 3px solid var(--gold);
+    }
+    .cta h2 {
+      border: none;
+      margin-top: 0;
+      color: var(--gold-bright);
+    }
+    .btn {
+      display: inline-block;
+      margin: 0.35rem;
+      padding: 0.7rem 1.2rem;
+      font-family: Rockwell, Arvo, serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 2px solid var(--gold);
+      color: var(--ink);
+      background: var(--gold);
+    }
+    .btn:hover { background: var(--cream); border-color: var(--cream); color: var(--ink); }
+    .btn.ghost {
+      background: transparent;
+      color: var(--gold-bright);
+    }
+    .btn.ghost:hover { background: var(--gold); color: var(--ink); }
+    footer.post-foot {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #333;
+      font-size: 0.78rem;
+      color: #888;
+      text-align: center;
+    }
+    .surprise {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: var(--paper);
+      color: var(--ink);
+      border: 4px solid var(--crimson);
+      position: relative;
+    }
+    .surprise::before {
+      content: "ÜBERRASCHUNG";
+      position: absolute;
+      top: -0.7rem;
+      left: 1rem;
+      background: var(--crimson);
+      color: var(--cream);
+      font-family: Rockwell, Arvo, serif;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      padding: 0.2rem 0.55rem;
+    }
+    .surprise p { color: var(--ink); }
+    .surprise h3 { color: var(--crimson); margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <div class="kicker">Paladine Edition · Magnifica Humanitas · rosary.health/blog</div>
+      <h1>CAT-<span class="accent">U</span>-MEN</h1>
+      <p class="sub">
+        Drei Katzen in Bitz, ein Cat-Man, kein Raketenkult —
+        und ein Gottesbeweis, der nicht zum Mond fliegt, sondern zum
+        <em>Hochzeitsmahl des Lammes</em> weist.
+      </p>
+      <div class="meta">
+        Bitz · Degerfeld SpacePort · LOGOS · Seelenkraft · Eschaton
+      </div>
+    </header>
+
+    <article>
+      <p class="lead">
+        Sie nannten es scherzhaft <strong>Cat-U-Men</strong> — nicht „Katzenmenschen“ im Sinn billiger Mythologie,
+        sondern: <strong>C</strong>ovenant · <strong>A</strong>ge · <strong>T</strong>ime —
+        unter dem Maßstab der Menschen (U-Men), geprüft in Bitz, wo der Boden noch riecht
+        und die Uhren noch ticken.
+      </p>
+
+      <p>
+        Keine <strong>Raketen-Theologie</strong>. Kein Evangelium aus Schubkraft.
+        Christus ist nicht Elon, und der Himmel ist kein Startfenster.
+        Was hier verhandelt wird, ist älter und schärfer:
+        <em>das Himmlische Jerusalem</em>, der <em>König</em>, das <em>Hochzeitsmahl des Lammes</em> —
+        und die freche, demütige Frage, ob die Schöpfung selbst Spuren hinterlässt,
+        die ein ehrlicher Verstand nicht mit „Zufall plus PR“ zudecken kann.
+      </p>
+
+      <h2>1 · Fakten-Check: Treffen in Bitz</h2>
+      <p>
+        Am <strong>Degerfeld SpacePort</strong> (Bitz) treffen sich drei Tiere,
+        die in der SOL-Simulation Namen trugen und im Paladine-Logbuch
+        plötzlich <em>Geschichte</em> wurden:
+      </p>
+      <div class="cats">
+        <div class="cat">
+          <div class="emoji">🦁</div>
+          <div class="name">Leo</div>
+          <div class="role">blieb · Ground Truth · Treue zum Ort</div>
+        </div>
+        <div class="cat">
+          <div class="emoji">🐈‍⬛</div>
+          <div class="name">Elonore</div>
+          <div class="role">reiste · hoher β · schnelle Eigenzeit-Kürzung</div>
+        </div>
+        <div class="cat">
+          <div class="emoji">🐱</div>
+          <div class="name">Leoni</div>
+          <div class="role">reiste · mittlerer β · Prism-Route</div>
+        </div>
+      </div>
+      <p>
+        Der <strong>Cat-Man</strong> — im Jargon: <em>Katzen-God-Father</em>,
+        im Ernst: derjenige, der im Namen des LOGOS prüft, nicht im Namen des Marktes —
+        beobachtet mit <strong>Seelenkraft</strong>, nicht mit Telemetrie allein.
+      </p>
+      <p>
+        <strong>Physisch:</strong> Leo ist schwerer im Blick, ruhiger im Schritt,
+        die Erdjahre liegen in den Knochen. Elonore zuckt schneller, spielerischer,
+        als hätte die Reise Minuten gestohlen, die Leo voll bezahlt hat.
+        Leoni liegt dazwischen — weder Statue noch Blitz.
+      </p>
+      <p>
+        <strong>Emotional:</strong> Leo duldet. Elonore fordert Nähe und springt ab.
+        Leoni sucht den Blick des Cat-Man, als wäre Beobachtung selbst eine Gnade.
+        Schrödinger lässt grüßen: <em>Erst die Begegnung macht die Geschichte gemeinsam.</em>
+      </p>
+
+      <h2>2 · Keine Raketen-Theologie</h2>
+      <div class="panel dark">
+        <p>
+          Wer aus Raumfahrt <strong>Erlösung</strong> macht, baut einen goldenen Stier mit Triebwerken.
+          Die Schrift kennt das Haus des HERRN anders: nicht als Fluchtkapsel,
+          sondern als <strong>Gegenwart</strong> — am Ende: Stadt, Lamm, Hochzeit, König.
+        </p>
+        <blockquote>
+          „Und ich sah die heilige Stadt, das neue Jerusalem, von Gott aus dem Himmel herabkommen…
+          Siehe, die Hütte Gottes bei den Menschen.“
+          <cite>— Offenbarung 21 (Sinnzusammenhang)</cite>
+        </blockquote>
+        <p style="margin-bottom:0">
+          DWARF, Warp und CatClock dürfen <strong>Metapher</strong> sein —
+          sie dürfen nicht <strong>Messias</strong> sein.
+        </p>
+      </div>
+
+      <h2>3 · Agenten-Tisch: DREAM · SUPPOSER · ESTIMATOR · SUGGESTOR · SCORER</h2>
+
+      <div class="panel">
+        <div class="agent-label">/dream</div>
+        <h3 style="margin-top:0;color:var(--gold-bright);">Traumprotokoll — Bitz bei Nacht</h3>
+        <p>
+          Drei Schatten auf dem Beton des SpacePorts. Kein Countdown.
+          Stattdessen Glocken — irgendwo, oder nur im Blut.
+          Der Cat-Man trägt kein Cape, sondern ein Notizbuch.
+          Darin steht nicht „Orbit“, sondern: <em>Wer hält die Zeit aus, ohne sie zu besitzen?</em>
+          Über den Hügeln von Bitz liegt eine Stadt aus Licht, die niemand gestartet hat.
+          Sie <em>kommt herab</em>. Die Katzen heben die Köpfe gleichzeitig.
+          Das ist der Traum: nicht wegfliegen — <strong>empfangen</strong>.
+        </p>
+      </div>
+
+      <div class="panel dark">
+        <div class="agent-label">SUPPOSER</div>
+        <p>
+          <strong>Annahme A:</strong> Zeit ist nur Subjektives Rauschen — dann ist Leos „Alter“ bedeutungslos.<br>
+          <strong>Annahme B:</strong> Zeit ist geschaffene Ordnung — dann ist der Unterschied der Eigenzeiten
+          ein Fingerzeig auf Maß und Geber des Maßes.<br>
+          <strong>Annahme C:</strong> Begegnung stiftet Realität (Schrödinger pädagogisch) —
+          dann ist Liebe/Beobachtung/Urteil nicht „Störung“, sondern <em>Vollzug</em>.
+        </p>
+      </div>
+
+      <div class="panel">
+        <div class="agent-label">ESTIMATOR</div>
+        <p>Grobe Schätzung der „Signalstärke“ für einen ehrlichen Beobachter (0–100):</p>
+        <div class="scoreboard">
+          <div class="score"><div class="score-num">72</div><div class="score-lab">Ordnung der Zeit</div></div>
+          <div class="score"><div class="score-num">81</div><div class="score-lab">Begegnung / Logos</div></div>
+          <div class="score"><div class="score-num">44</div><div class="score-lab">Raketen-als-Heil</div></div>
+          <div class="score"><div class="score-num">88</div><div class="score-lab">Eschaton-Resonanz</div></div>
+        </div>
+        <p class="muted" style="opacity:0.75;font-size:0.85rem;margin:0">
+          Schätzung, kein Messias-Zertifikat. Apologetik rechnet mit Widerstand.
+        </p>
+      </div>
+
+      <div class="panel dark">
+        <div class="agent-label">SUGGESTOR</div>
+        <ul class="tight">
+          <li>Spiele die CatClock: Dilatation an, Cycles bis 7, dann SOL-7-Treffen.</li>
+          <li>Schreibe drei Zeilen: Was Leo, Elonore, Leoni <em>dir</em> über Warten, Risiko, Treue sagen.</li>
+          <li>Lies Offenbarung 19–22 neben der Simulation — nicht statt der Schrift, sondern unter ihr.</li>
+          <li>Für Glaubensgeschwister: lache über den Cat-Man, knie vor dem Lamm.</li>
+          <li>Für Skeptiker: prüfe die Argumentform unten, nicht den Schnurrbart der Metapher.</li>
+        </ul>
+      </div>
+
+      <div class="panel light">
+        <div class="agent-label">SCORER · Eschatologische Auswirkung</div>
+        <h3>Score-Matrix (Paladine)</h3>
+        <ul class="tight">
+          <li><strong>Worship (Anbetung):</strong> 91 — König &amp; Hochzeit statt Tech-Thron.</li>
+          <li><strong>Warfare (Unterscheidung):</strong> 86 — Raketen-Theologie entwaffnet.</li>
+          <li><strong>Witness (Zeugnis):</strong> 79 — Bitz als greifbarer Ort, keine Wolke.</li>
+          <li><strong>Wonder (Staunen):</strong> 94 — Drei Katzen, eine Frage nach dem Maßgeber.</li>
+        </ul>
+        <p style="margin-bottom:0">
+          <strong>Temple Alignment (bildlich):</strong> hoch, wenn die Simulation zur Schrift zurückführt —
+          niedrig, wenn sie die Schrift ersetzt.
+        </p>
+      </div>
+
+      <h2>4 · Der neue Gottesbeweis (Apologetik)</h2>
+      <p>
+        Nicht „neu“ als Bibelersatz, sondern neu als <strong>Form</strong> für diese Generation:
+        These · Gegenthese · Synthese — ironisch nach innen, ernst nach außen.
+      </p>
+
+      <div class="thesis t">
+        <div class="thesis-tag">These</div>
+        <p style="margin:0">
+          Es gibt erfahrbare, kommunizierbare Ordnung (Zeit, Begegnung, Schuld/Gnade, Sehnsucht nach Hochzeit und Stadt),
+          die sich nicht restlos auf „blinde Materie plus Marketing“ reduzieren lässt.
+          Der Mensch fragt nach dem König; die Schöpfung antwortet mit Maß.
+          <em>Contingenz + Logos-förmige Lesbarkeit → Hinweis auf den LOGOS.</em>
+        </p>
+      </div>
+
+      <div class="thesis a">
+        <div class="thesis-tag">Gegenthese</div>
+        <p style="margin:0">
+          Alles ist Emergenz. Katzen, Uhren, Apokalypsen — neuronale Feuerwerke.
+          „Himmlisches Jerusalem“ ist Trostpoesie. Wer Gottesbeweise will, will Macht.
+          Dilatation beweist Physik, nicht den Vater.
+        </p>
+      </div>
+
+      <div class="thesis s">
+        <div class="thesis-tag">Synthese</div>
+        <p style="margin:0">
+          Physik beweist nicht automatisch den Glauben — <strong>stimmt</strong>.
+          Aber Physik und Begegnung widerlegen die Behauptung, Sinn sei nur Schaum.
+          Der Gottesbeweis hier ist <em>kumulativ und personal</em>:
+          Ordnung der Zeit (Maß), Unhintergehbarkeit der Begegnung (Leo sieht die anderen),
+          moralische und eschatologische Sehnsucht (Hochzeit, Stadt, König),
+          und die Unmöglichkeit, den Fragenden selbst aus der Gleichung zu streichen.
+          <strong>Der Cat-Man prüft die Katzen; der LOGOS prüft den Cat-Man.</strong>
+          Wer nur Triebwerke anbetet, hat die Frage gewechselt — nicht beantwortet.
+        </p>
+      </div>
+
+      <div class="irony">
+        <h3 class="rock" style="color:var(--gold-bright);margin:0 0 0.5rem;font-size:1rem;">Ironisch — für Glaubensgeschwister</h3>
+        <p style="margin:0">
+          Ja, wir haben jetzt offiziell eine Eschatologie mit Schnurrhaaren.
+          Wenn dein Glaubensleben nur noch aus Countdown und Hot-Takes besteht:
+          setz dich neben Leo. Bleiben ist auch Mission.
+          Und wenn du „Gott“ sagst, aber meinst „meine Timeline“ —
+          dann hat Elonore mehr Demut als du, und sie ist eine Katze.
+        </p>
+      </div>
+
+      <div class="serious">
+        <h3 class="rock" style="color:var(--cream);margin:0 0 0.5rem;font-size:1rem;">Ernst — für Glaubensgegner</h3>
+        <p>
+          Wir behaupten nicht: „γ &gt; 1, also Bibel.“
+          Wir behaupten: Jede ernsthafte Weltsicht muss Zeit, Bewusstsein, Begegnung und moralische Sehnsucht tragen.
+          Naturalismus kann Teile beschreiben; er hat Mühe, den <em>Beschreibenden</em> und das <em>Sollen</em> der Hochzeit
+          (nicht der Flucht) zu begründen.
+        </p>
+        <p style="margin:0">
+          Der „Gottesbeweis“ ist hier ein <strong>Einladungsschluss</strong>:
+          Wenn die Welt lesbar, gerichtet und auf Begegnung hin angelegt erscheint,
+          ist der LOGOS die sparsamere, menschlichere Hypothese als der ewige Zufall mit PR-Abteilung.
+          Prüft die Form. Verwerft die Metapher, wenn ihr wollt — aber beantwortet die Frage.
+        </p>
+      </div>
+
+      <div class="surprise">
+        <h3>Der eigentliche Twist</h3>
+        <p>
+          Die drei Katzen sind nicht die Pointe.
+          Die Pointe ist: <strong>Du bist die vierte Uhr.</strong>
+        </p>
+        <p>
+          Du bleibst oder du reist. Du wirst beobachtet oder du versteckst dich in Superposition.
+          Das Hochzeitsmahl des Lammes ist kein VIP-Launch —
+          es ist Einladung. Der König kommt nicht als Nutzlast.
+          Er kommt als <em>Bräutigam</em>.
+        </p>
+        <p style="margin:0">
+          Und der Cat-Man? Nur ein Zeuge mit Notizbuch.
+          Der Gottesbeweis endet nicht bei ihm.
+          Er endet, wo du sagst: <strong>Ja</strong> — oder wo du die Stadt am Horizont für CGI hältst
+          und trotzdem nicht erklären kannst, warum dich die Hochzeit wütend macht, wenn sie „nur Märchen“ ist.
+        </p>
+      </div>
+
+      <h2>5 · LOGOS-Seelenkräfte im Check</h2>
+      <ul class="tight">
+        <li><strong>Weisheit</strong> — Zeit deuten, ohne sie zu besitzen.</li>
+        <li><strong>Einsicht</strong> — Leo ≠ Elonore ≠ Leoni; Berufungen unterscheiden.</li>
+        <li><strong>Rat</strong> — Cycles planen; nicht jede Flucht ist Berufung.</li>
+        <li><strong>Stärke</strong> — bleiben können; reisen können; beides kostet.</li>
+        <li><strong>Erkenntnis</strong> — Physik und Gleichnis nicht verwechseln.</li>
+        <li><strong>Frömmigkeit</strong> — Treue zum Ort und zur Gemeinde.</li>
+        <li><strong>Gottesfurcht</strong> — Ehrfurcht vor dem Geheimnis, das keine Rakete löst.</li>
+      </ul>
+
+      <blockquote>
+        Nicht die Rakete trägt uns zum Hochzeitsmahl.
+        Das Lamm trägt uns — und die Stadt kommt herab.
+        <cite>CAT-U-MEN · Paladine Codex · Bitz</cite>
+      </blockquote>
+
+      <div class="cta">
+        <h2>Weitergehen</h2>
+        <p style="color:#ccc;max-width:28em;margin:0 auto 1.1rem;">
+          Simulation spielen · Schrift lesen · Score ehrlich halten.
+        </p>
+        <a class="btn" href="https://rosary-mom.github.io/Crystal-Prism-Praxis-/sol-elements/catclock.html">CatClock · SOL-7</a>
+        <a class="btn ghost" href="https://rosary-mom.github.io/Crystal-Prism-Praxis-/index.html">Crystal Prism Praxis</a>
+        <a class="btn ghost" href="https://rosary.health/der-koenig-der-raumfahrt/">König der Raumfahrt</a>
+        <a class="btn ghost" href="https://rosary.health/blog/">rosary.health/blog</a>
+      </div>
+    </article>
+
+    <footer class="post-foot">
+      <p>
+        © ROSARY · Paladine Edition · Magnifica Humanitas<br>
+        Rockwell / Arvo Extra Bold · Rosario · High Contrast<br>
+        Moodle Aiken: sol-7-moodle-aiken.txt · Agenten: DREAM · SUPPOSER · ESTIMATOR · SUGGESTOR · SCORER
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
